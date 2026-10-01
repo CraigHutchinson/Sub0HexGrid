@@ -1,0 +1,31 @@
+---
+description: C++ authoring and review standards for Sub0HexGrid.
+globs: "**/*.cpp,**/*.h,**/*.hpp,**/*.inl,**/*.cc"
+alwaysApply: false
+---
+
+# C++ Standards
+
+| Trigger | Skill |
+|---|---|
+| Before writing a new class, public API or module | cpp-write |
+| Before implementing a plan | cpp-review (plan mode) |
+| After substantive C++ changes | cpp-review |
+| After L0/L1 MUST findings with a Rewrite Brief | cpp-simplify |
+
+Full reference material: installed cpp/references (here ~/.agents/skills/cpp/references).
+
+## MUST constraints
+
+Prefer established project types; check the reinvention catalogue before utilities.
+Follow allocation conventions, RAII and explicit ownership; no raw new/delete.
+No namespace/function mutable caches or hidden process-lifetime state. Prefer an
+instantiable provider when state is needed. Do not duplicate an existing utility.
+Sub0HexGrid scalar kernel is product-neutral, allocation-free and validates failure.
+
+## SHOULD constraints
+
+Use nodiscard on Try/observer/Compute operations and noexcept on pure scalar methods.
+Use named predicates, no boolean behavior selectors, pragma once, matching type/file
+casing and minimal includes. Raw pointer members require ownership annotations.
+Comments explain contracts or rationale; no phase/roadmap narrative in source.
