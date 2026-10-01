@@ -2,6 +2,7 @@
 
 | Owner | State | Scope / resource | Base |
 |---|---|---|---|
-| Architect | Active | Empty-repo initialization, library/docs/tests/package; serialized builds | 2026-10-01 / empty repository |
+| Architect | Complete increment | Initial kernel/docs/package; CPU released | 2026-10-01 / 9a4e604 / initial-kernel |
 
-No other claims were present. Preserve worktrees/artifacts; no parallel measurements.
+Local Debug/Release and ASan/UBSan gates passed; see validation.md and review.md.
+Exact-head CI and merge are recorded in the PR. H2/H3 and future surfaces are unstarted.

@@ -23,7 +23,7 @@ Round each fractional cube component half away from zero, then repair the compon
 with the largest rounding residual. On equal computed residuals, our explicit
 priority is q, then r, then s. This is a deliberate tie-policy difference from the
 reference's strict-comparison branch order. Check finite intermediates and corrected
-q/r representability before integer casts. No epsilon bias or cross-platform seam
+q/r representability before integer casts. Center conversion also rejects precision collapse when its result does not map back to the requested cell. No epsilon bias or cross-platform seam
 identity is promised. Fixtures pin analytic edge/vertex choices where representable.
 
 Invalid factories/conversions return nullopt. Extremely large finite layout/point
