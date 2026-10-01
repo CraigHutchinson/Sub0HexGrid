@@ -49,3 +49,9 @@ Plan/code review; independent topology/geometry fixtures; supported Debug/Releas
 ASan/UBSan; installed consumer and header checks; actual evidence and CI; reviewed
 merge. No benchmark/FPS claims. Upstream reuse and later Crucible adoption are
 recorded separately with the exact commit and consumer evidence.
+
+## Preserved future requirement
+
+See [surface extensions](future-surfaces.md) for planar height and hexasphere-like
+worlds. Their adjacency, projection, height and material semantics require separate
+facets/consumer decisions. No initial API is a generic sphere/terrain interface.

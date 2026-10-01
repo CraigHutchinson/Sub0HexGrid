@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.25)
+project(Sub0HexGridConsumer LANGUAGES CXX)
+find_package(Sub0HexGrid 0.1 CONFIG REQUIRED)
+enable_testing()
+add_executable(consumer ../../examples/mapping.cpp)
+target_link_libraries(consumer PRIVATE Sub0HexGrid::Sub0HexGrid)
+set_target_properties(consumer PROPERTIES CXX_EXTENSIONS OFF NO_SYSTEM_FROM_IMPORTED ON)
+target_compile_options(consumer PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/W4;/WX;/permissive->
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall;-Wextra;-Wpedantic;-Werror>)
+if(SUB0HEXGRID_CONSUMER_SANITIZERS)
+    target_compile_options(consumer PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+    target_link_options(consumer PRIVATE -fsanitize=address,undefined)
+endif()
+add_test(NAME installed_mapping COMMAND consumer)

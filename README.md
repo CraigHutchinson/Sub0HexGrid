@@ -42,3 +42,10 @@ alone cannot provide complete radius candidates or prove game performance.
 
 Project license has not yet been selected; no external source code was copied.
 Algorithm references and convention mapping are recorded in the numerical decision.
+
+## Preserved extensions
+
+[Future surface requirements](docs/future-surfaces.md) preserve local planar terrain
+height and possible hexasphere-like subdivision. Terrain resources, mining/erosion,
+movement cost and permanent nanite construction remain receiving-application rules.
+The initial planar kernel does not implement spherical adjacency or terrain state.
