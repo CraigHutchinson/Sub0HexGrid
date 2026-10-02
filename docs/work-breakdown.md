@@ -7,12 +7,14 @@
 | H2 bounded regions | Finite shape/storage mapping and complete inclusive query candidates | Real spatial caller; brute-force completeness, numeric/capacity/border tests |
 | H3 Crucible adoption | Pinned spatial consumer, application-owned bins and exact filtering | Scenario/query/replay evidence; separate Blight adjacency decision |
 | H4 measured refinement | Real workload improvements and extra consumed operations | Controlled evidence, package consumers and compatibility |
+| Hierarchy evaluation | Prior art, HexGrid/Crucible/ECS integration review, architecture selection | Accepted/deferred ADR and bounded comparison before public implementation |
 
 H0/H1 are delivered initialization. H2 was explicitly authorized and implemented;
 see [delivery](phases/h2-delivery.md) for bounded processing and measured limitations.
-The next useful increment is an H2 refinement: reduce conservative candidate excess
-against the recorded oracle/baseline, retaining complete inclusive semantics and
-resumability. H3 requires Crucible world/replay agreement before dispatch.
+The user added [hierarchy evaluation](phases/hierarchy-research.md) as the next
+research/review/architecture activity. Initial sourced research and cross-repo audit
+are recorded; architecture selection and a bounded comparison remain gated.
+H2 candidate refinement is complementary. H3 requires world/replay agreement.
 The [workstream catalog](workstreams/README.md) defines durable component boundaries.
 Before H2 dispatch, record phase owners, compact region/index and candidate contracts,
 shared fixture separation and performance gates from [architecture](architecture.md).

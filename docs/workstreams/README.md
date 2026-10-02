@@ -12,6 +12,7 @@ the stream brief and ACTIVE_WORK_LOG.md before starting.
 | G | [Geometry](geometry.md) | include/sub0hexgrid/Point.hpp and PointyLayout.hpp, src/PointyLayout.cpp; future tests/geometry/, benchmarks/geometry/ | Implemented scalar; example/package |
 | R | [Regions](regions.md) | include/sub0hexgrid/regions/, src/regions/, tests/regions/; future benchmarks/regions/ | Implemented; standalone spatial/package consumer |
 | Q | [Candidates](candidates.md) | include/sub0hexgrid/candidates/, src/candidates/, tests/candidates/; future benchmarks/candidates/ | Implemented; standalone spatial/package consumer |
+| H | [Hierarchy](hierarchy.md) | docs/research/hierarchy.md and H brief; future hierarchy code only after accepted ADR | Initial research reviewed; cross-repo architecture selection pending |
 | X | [Interoperability](interoperability.md) | Future include/sub0hexgrid/interop/, tests/interop/; implementation only when justified | Proposed; named external backend required |
 
 Each stream owns its named brief. New folders/manifests are planned boundaries,

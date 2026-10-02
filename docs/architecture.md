@@ -13,6 +13,7 @@ it does not authorize implementation or create public APIs/targets.
 | Geometry G | Validated pointy layout and checked world mapping | Immutable layout + Point/Axial -> optional Axial/Point | T + Point; implemented |
 | Regions R | Finite membership and compact coordinate/index mapping | AxialRegion inclusive rectangle + Axial/uint64 index -> checked membership/index/coordinate | T; implemented H2 |
 | Candidates Q | Complete conservative world-radius candidate traversal | G layout + R region + query disk -> clipped conservative rectangle, slices and cursor batches | G + R; implemented H2 |
+| Hierarchy H | Multilevel addressing, logical grouping and conservative descendant coverage | Frozen fine cells and level/group rules -> proposed parent/bounds contracts | T/G/R conventions; compatible with Q reference, research phase, no API |
 | Interoperability X | External-kernel descriptor, buffer layout and parity specification | Frozen G/R/Q conventions -> explicitly laid-out descriptor and fixtures | G + R + Q; proposed, consumer-gated |
 | Integration I | Contracts, package/build inventory, dependencies, CI, cross-component evidence | Stream handoffs -> reviewed combined package and consumer evidence | Owns shared wiring; current |
 
@@ -73,7 +74,24 @@ ID sorting and repeated identity lookup are consumer requirements to justify,
 not compulsory traversal behavior. Complete dense neighborhoods can still require
 quadratic work; occupancy limits or approximate steering belong to the application.
 
-## External compute boundary
+## Hierarchical processing and zoom
+
+Hierarchy is a separate [workstream](workstreams/hierarchy.md), with an initial
+[source/integration review](research/hierarchy.md) and a [research-to-architecture
+phase](phases/hierarchy-research.md). Logical parentage, geometric containment,
+exact query acceleration and visual LOD are distinct contracts. Compare true
+multiresolution hex schemes with exact axial block grouping, occupancy pyramids,
+sparse linear trees and BVHs; no shape/backend has been selected.
+
+H may supply consumed geometric grouping/bounds rules. Crucible owns occupied
+hierarchy arrays, summaries, updates, snapshot publication and zoom/processing policy.
+Sub0ECS retains entity/component ownership; integration verifies bounded gathering,
+stable identity and borrow barriers against the actual pinned version. Publish leaves
+and summaries together. Node and leaf-entity progress must both remain resumable;
+coarse display geometry cannot silently prune logical descendants. H hands stable
+contracts to X if an external accelerator caller is selected.
+
+## External compute contract
 
 X defines an interchange contract only with a named external CUDA/Vulkan caller.
 Specify fixed-width fields, bounds, origin/scale, index convention, offsets, strides,

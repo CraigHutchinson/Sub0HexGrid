@@ -1,6 +1,8 @@
 # H2 delivery: bounded spatial foundation
 
 Date: 2026-10-02. Base: d24d08ae5577ab0cec03f0b0524bebf5944a5174.
+Implementation/measured source: 96d8b15b02f784a17048be7fc2f6bb97d807fae0;
+[PR 4](https://github.com/CraigHutchinson/Sub0HexGrid/pull/4) records final exact-head CI.
 Execution authorized by the user, including iterative/time/workload batching.
 PR and exact-head CI are the final cross-platform delivery record.
 
@@ -54,7 +56,8 @@ code review found no blocking numerical/lifetime/bounded-work findings. Resolved
 SHOULD findings: constexpr accessors, accurate capacity-payload accounting, explicit
 empty-output query fixture, empty/coincident/large-radius benchmark and occupancy
 stats. Benchmark self-review checked timed/setup separation and honest scope.
-Linux ASan/UBSan and Windows/Linux Debug/Release are gated by exact-head PR CI.
+Linux ASan/UBSan and Windows/Linux Debug/Release passed exact-head PR CI at 96d8b15.
+The final documentation head is also checked in PR 4 before merge.
 
 ## Controlled baseline
 
@@ -105,6 +108,12 @@ cannot avoid complete-output cost. No FPS, speedup, CPU/GPU parity or parallel
 scaling claim follows. Native accelerator work and Crucible migration remain deferred.
 
 ## Next sprint and handoff
+
+Subsequent user direction adds [hierarchy evaluation](hierarchy-research.md) as the
+next research/review/architecture phase across HexGrid, Crucible and Sub0ECS.
+Its initial prior-art/source and receiving-contract audit are recorded separately.
+The following H2 refinements remain complementary follow-ups rather than displacing
+that requested research axis.
 
 HX-05 / Q + I: tighter conservative bounds. First preserve the independent oracle,
 seam proof, slicing and cursor semantics; measure empty/small/clustered/border cases
