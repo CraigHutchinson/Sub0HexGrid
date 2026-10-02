@@ -9,6 +9,8 @@ option(SUB0HEXGRID_BUILD_BENCHMARKS "Build nanobench scalar benchmarks" OFF)
 option(SUB0HEXGRID_ENABLE_SANITIZERS "Instrument GCC/Clang with ASan/UBSan" OFF)
 
 add_library(Sub0HexGrid STATIC src/Axial.cpp src/PointyLayout.cpp)
+add_subdirectory(src/regions)
+add_subdirectory(src/candidates)
 add_library(Sub0HexGrid::Sub0HexGrid ALIAS Sub0HexGrid)
 target_compile_features(Sub0HexGrid PUBLIC cxx_std_23)
 target_include_directories(Sub0HexGrid PUBLIC
@@ -36,6 +38,12 @@ if(SUB0HEXGRID_BUILD_EXAMPLES)
     add_executable(sub0hexgrid_example examples/mapping.cpp)
     target_link_libraries(sub0hexgrid_example PRIVATE Sub0HexGrid::Sub0HexGrid)
     sub0hexgrid_instrument(sub0hexgrid_example)
+    add_executable(sub0hexgrid_spatial examples/spatial.cpp)
+    target_link_libraries(sub0hexgrid_spatial PRIVATE Sub0HexGrid::Sub0HexGrid)
+    target_compile_options(sub0hexgrid_spatial PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/W4;/WX;/permissive->
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall;-Wextra;-Wpedantic;-Werror>)
+    sub0hexgrid_instrument(sub0hexgrid_spatial)
 endif()
 
 if(SUB0HEXGRID_BUILD_TESTS)

@@ -7,11 +7,12 @@ the stream brief and ACTIVE_WORK_LOG.md before starting.
 
 | ID | Brief | Exclusive implementation paths | State / receiving caller |
 |---|---|---|---|
-| I | [Integration](integration.md) | Root CMake, cmake/, presets, CI, AGENTS, central docs, examples/, tests/consumer and headers; current tests/kernel.cpp and benchmarks/kernel.cpp until split | Current package/example; H2 coordination proposed |
+| I | [Integration](integration.md) | Root CMake, cmake/, presets, CI, AGENTS, central docs, examples/, tests/consumer and headers; benchmarks/kernel.cpp and spatial.cpp | Package/examples, H2 combined evidence |
 | T | [Topology](topology.md) | include/sub0hexgrid/Axial.hpp, src/Axial.cpp; future tests/topology/, benchmarks/topology/ | Implemented scalar; example/package |
 | G | [Geometry](geometry.md) | include/sub0hexgrid/Point.hpp and PointyLayout.hpp, src/PointyLayout.cpp; future tests/geometry/, benchmarks/geometry/ | Implemented scalar; example/package |
-| R | [Regions](regions.md) | Future include/sub0hexgrid/regions/, src/regions/, tests/regions/, benchmarks/regions/ | Proposed; Crucible spatial consumer required |
-| Q | [Candidates](candidates.md) | Future include/sub0hexgrid/candidates/, src/candidates/, tests/candidates/, benchmarks/candidates/ | Proposed; Crucible radius-query consumer required |
+| R | [Regions](regions.md) | include/sub0hexgrid/regions/, src/regions/, tests/regions/; future benchmarks/regions/ | Implemented; standalone spatial/package consumer |
+| Q | [Candidates](candidates.md) | include/sub0hexgrid/candidates/, src/candidates/, tests/candidates/; future benchmarks/candidates/ | Implemented; standalone spatial/package consumer |
+| H | [Hierarchy](hierarchy.md) | docs/research/hierarchy.md and H brief; future hierarchy code only after accepted ADR | Initial research reviewed; cross-repo architecture selection pending |
 | X | [Interoperability](interoperability.md) | Future include/sub0hexgrid/interop/, tests/interop/; implementation only when justified | Proposed; named external backend required |
 
 Each stream owns its named brief. New folders/manifests are planned boundaries,
@@ -22,7 +23,8 @@ can edit independently; until then they submit exact patches to I.
 Phase plans and close records live in [phases/README.md](../phases/README.md).
 The [next H2 sprint](../phases/h2-bounded-spatial.md) selects I + R/Q with explicit
 contract/fixture handoffs; T/G maintenance is consolidated with I and X is deferred.
-It is a plan, not a dispatch or an implementation claim.
+Execution was explicitly authorized; [H2 delivery](../phases/h2-delivery.md)
+records integration, reviews and the next refinement. T/G fixtures are now split.
 
 ## Dispatch and shared surfaces
 

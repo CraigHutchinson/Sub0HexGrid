@@ -19,6 +19,8 @@ jobs:
       - run: ctest --preset ${{ matrix.preset }}
       - run: ./build/${{ matrix.preset }}/benchmarks/sub0hexgrid_benchmarks
         if: matrix.preset == 'release'
+      - run: ./build/${{ matrix.preset }}/benchmarks/sub0hexgrid_spatial_bench --smoke
+        if: matrix.preset == 'release'
   sanitize:
     runs-on: ubuntu-24.04
     env:

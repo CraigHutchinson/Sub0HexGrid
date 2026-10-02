@@ -1,8 +1,9 @@
 # Next sprint: H2 bounded spatial foundation
 
 Date: 2026-10-02. Planning baseline: 0953973accb2e33cb052b5272ee8922ab5933b09
-(PR 2 merged). Status: defined, not dispatched. This plan authorizes no worker launch
-or implementation by itself. Refresh main and active claims at execution start.
+(PR 2 merged). Status: implemented following explicit user execution authorization;
+see [delivery and deviations](h2-delivery.md). This original plan did not itself
+authorize worker launch. Refresh main and active claims at execution start.
 This is an outcome-bounded sprint; no calendar estimate or game frame budget is assumed.
 
 ## Outcome
