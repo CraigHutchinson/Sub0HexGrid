@@ -5,6 +5,7 @@ include(CMakePackageConfigHelpers)
 
 option(SUB0HEXGRID_BUILD_TESTS "Build kernel and package tests" ${PROJECT_IS_TOP_LEVEL})
 option(SUB0HEXGRID_BUILD_EXAMPLES "Build the mapping example" ${PROJECT_IS_TOP_LEVEL})
+option(SUB0HEXGRID_BUILD_BENCHMARKS "Build nanobench scalar benchmarks" OFF)
 option(SUB0HEXGRID_ENABLE_SANITIZERS "Instrument GCC/Clang with ASan/UBSan" OFF)
 
 add_library(Sub0HexGrid STATIC src/Axial.cpp src/PointyLayout.cpp)
@@ -40,6 +41,10 @@ endif()
 if(SUB0HEXGRID_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
+endif()
+
+if(SUB0HEXGRID_BUILD_BENCHMARKS)
+    add_subdirectory(benchmarks)
 endif()
 
 install(TARGETS Sub0HexGrid EXPORT Sub0HexGridTargets

@@ -1,21 +1,21 @@
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>
+
 #include <algorithm>
 #include <array>
 #include <cmath>
 #include <cstdint>
-#include <iostream>
 #include <limits>
 #include <map>
 #include <numbers>
 #include <queue>
-#include <stdexcept>
-#include <string>
 #include <string_view>
 
 #include <sub0hexgrid/PointyLayout.hpp>
 
 namespace {
 void Check(bool condition, std::string_view message) {
-    if (!condition) throw std::runtime_error(std::string{message});
+    REQUIRE_MESSAGE(condition, message);
 }
 
 void CheckTopology() {
@@ -139,13 +139,10 @@ void CheckGeometry() {
 }
 }
 
-int main() {
-    try {
-        CheckTopology();
-        CheckGeometry();
-        std::cout << "Topology graph oracle, geometry oracle, numeric boundaries passed\n";
-    } catch (const std::exception& error) {
-        std::cerr << error.what() << '\n';
-        return 1;
-    }
+TEST_CASE("Checked axial topology agrees with independent graph oracle") {
+    CheckTopology();
+}
+
+TEST_CASE("Pointy geometry agrees with independent nearest-center oracle") {
+    CheckGeometry();
 }

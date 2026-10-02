@@ -8,7 +8,12 @@
 | H3 Crucible adoption | Pinned spatial consumer, application-owned bins and exact filtering | Scenario/query/replay evidence; separate Blight adjacency decision |
 | H4 measured refinement | Real workload improvements and extra consumed operations | Controlled evidence, package consumers and compatibility |
 
-H0/H1 are the authorized initialization. H2/H3 are planned, not automatically started.
+H0/H1 are delivered initialization. H2/H3 are planned, not automatically started.
+The [workstream catalog](workstreams/README.md) defines durable component boundaries.
+Before H2 dispatch, record phase owners, compact region/index and candidate contracts,
+shared fixture separation and performance gates from [architecture](architecture.md).
+2026-10-02 tooling/methodology work adopts doctest/CPM, nanobench and the catalog;
+it does not implement region traversal, application storage or accelerator kernels.
 Review boundaries and reuse at each phase start; use small consumed increments.
 Library geometry and Crucible gameplay are separate owners. A second consumer can
 justify broader facets but must not be fabricated. Record upstream/consumer commits.

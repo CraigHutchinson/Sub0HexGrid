@@ -10,6 +10,29 @@ application storage outside this library. No speculative operation, orientation
 selector, generic owning grid, polymorphic backend or dependency is added without
 a receiving caller and a bounded requirement.
 
+## Parallel workstreams
+
+Use the reusable parallel-workstreams skill; its maintained project copy is
+skills/parallel-workstreams/SKILL.md. Follow docs/workstreams/README.md and the
+component brief. Architecture defines dependencies; the phase plan defines current
+assignments. Planning does not dispatch agents or implement H2/H3 automatically.
+Reassess retain/consolidate/split/defer at phase start and record reasons.
+
+The integrator owns shared contracts, root CMake/exports, cmake/dependency pins,
+presets, CI, central docs and current shared fixtures. Independent workers edit
+only claimed component paths and send shared-file patch requests. Freeze contracts
+and split shared fixtures before dependent parallel implementation; no guessed
+interfaces, source globs, dummy objects or stub APIs. Use separate worktrees/build
+trees; coordinate resource-heavy runs across sibling projects. Handoffs identify
+SHAs, consumers, numerical/capacity/lifetime contracts, evidence and open gates.
+Close each phase with reviewed integration, exact-head CI, delivery baseline and
+follow-up owner/gates. Component boundaries are stable; agent assignments are not.
+
+Correctness tests use doctest and benchmarks use nanobench, fetched through CPM
+at full commits in cmake/DependencyPins.cmake. Keep both private to development
+targets and out of installed runtime dependencies. Read docs/benchmarking.md before
+measuring; scalar or CI smoke results do not prove large-grid/game performance.
+
 Reference exact algorithms before implementation and derive the mapping to our
 axes, radius and rounding conventions. Floating edge choices and finite-region
 behavior are contracts, not incidental implementation details. Check package
