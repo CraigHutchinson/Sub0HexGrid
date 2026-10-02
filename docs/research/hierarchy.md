@@ -1,8 +1,9 @@
 # Hierarchy: initial research and integration review
 
 Reviewed 2026-10-02. Initial research complete; architecture selection and prototype
-evidence remain gates in [the phase](../phases/hierarchy-research.md). Findings below
-separate source evidence from proposed project application. No source establishes
+evidence remain gates in [the phase](../phases/hierarchy-research.md). The
+[use-case experiment programme](hierarchy-experiments.md) extends this first review.
+Findings below separate source evidence from proposed project application. No source establishes
 the best structure for this game's workload.
 
 ## Prior art and limits
@@ -68,7 +69,7 @@ not long-lived ECS row offsets/pointers. Build bins and summaries in pending sto
 the pinned ECS handle's 24-bit slot and wrapping 8-bit generation are distinct from
 SampleId and snapshot epoch. Future delayed mutation requires liveness/reuse policy.
 Yielded gathers must freeze the source tick or read an owned immutable snapshot.
-publish both under one epoch after completion. Tick-start steering cannot observe
+Publish both under one epoch after completion. Tick-start steering cannot observe
 post-movement summaries. Versions detect replacement but do not extend object
 lifetime: yielded queries must either cancel on publication or hold a defined lease.
 Incremental updates require old/new membership, predicate changes and ancestor dirty

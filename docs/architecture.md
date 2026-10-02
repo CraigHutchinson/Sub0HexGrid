@@ -81,7 +81,13 @@ Hierarchy is a separate [workstream](workstreams/hierarchy.md), with an initial
 phase](phases/hierarchy-research.md). Logical parentage, geometric containment,
 exact query acceleration and visual LOD are distinct contracts. Compare true
 multiresolution hex schemes with exact axial block grouping, occupancy pyramids,
-sparse linear trees and BVHs; no shape/backend has been selected.
+sparse linear trees and BVHs; no shape/backend has been selected. The
+[use-case programme](research/hierarchy-experiments.md) prioritizes motion, mini-map
+and top-down pan/zoom, with navigation reference/contracts defined alongside them.
+Shared-goal fields, portal graphs and view caches are independent comparison axes.
+Multiple private spikes and measured refinement rounds precede the production ADR;
+a protocol ADR authorizes experiments without predetermining their outcome. Separate
+motion, view and navigation representations remain valid eventual choices.
 
 H may supply consumed geometric grouping/bounds rules. Crucible owns occupied
 hierarchy arrays, summaries, updates, snapshot publication and zoom/processing policy.
