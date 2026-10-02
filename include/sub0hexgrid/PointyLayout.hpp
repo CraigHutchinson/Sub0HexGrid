@@ -22,6 +22,12 @@ public:
     /// Rounding is half away from zero. Near-seam cross-platform identity is not promised.
     [[nodiscard]] std::optional<Axial> TryCellAt(Point position) const noexcept;
 
+    /// Circumradius in world units, shared by conservative candidate bounds.
+    [[nodiscard]] double GetRadius() const noexcept { return m_Radius; }
+
+    /// World-space translation used by candidate normalization.
+    [[nodiscard]] Point GetOrigin() const noexcept { return m_Origin; }
+
 private:
     PointyLayout(double radius, Point origin) noexcept;
     double m_Radius;

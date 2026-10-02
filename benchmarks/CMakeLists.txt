@@ -11,3 +11,10 @@ target_compile_options(sub0hexgrid_benchmarks PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4;/WX;/permissive->
     $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall;-Wextra;-Wpedantic;-Werror>)
 sub0hexgrid_instrument(sub0hexgrid_benchmarks)
+
+add_executable(sub0hexgrid_spatial_bench spatial.cpp)
+target_link_libraries(sub0hexgrid_spatial_bench PRIVATE Sub0HexGrid::Sub0HexGrid nanobench::nanobench)
+target_compile_options(sub0hexgrid_spatial_bench PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/W4;/WX;/permissive->
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall;-Wextra;-Wpedantic;-Werror>)
+sub0hexgrid_instrument(sub0hexgrid_spatial_bench)

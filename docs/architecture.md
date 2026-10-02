@@ -11,15 +11,15 @@ it does not authorize implementation or create public APIs/targets.
 |---|---|---|---|
 | Topology T | Integer lattice values, checked steps and exact distance | Axial + Direction -> optional Axial; Axial pair -> uint64 distance | No geometry/storage dependency; implemented |
 | Geometry G | Validated pointy layout and checked world mapping | Immutable layout + Point/Axial -> optional Axial/Point | T + Point; implemented |
-| Regions R | Finite membership and compact coordinate/index mapping | Validated bounds + Axial/index -> checked membership/index/coordinate | T; proposed H2 |
-| Candidates Q | Complete conservative world-radius candidate traversal | G layout + R region + query disk -> clipped row intervals/cells | G + R; proposed H2 |
+| Regions R | Finite membership and compact coordinate/index mapping | AxialRegion inclusive rectangle + Axial/uint64 index -> checked membership/index/coordinate | T; implemented H2 |
+| Candidates Q | Complete conservative world-radius candidate traversal | G layout + R region + query disk -> clipped conservative rectangle, slices and cursor batches | G + R; implemented H2 |
 | Interoperability X | External-kernel descriptor, buffer layout and parity specification | Frozen G/R/Q conventions -> explicitly laid-out descriptor and fixtures | G + R + Q; proposed, consumer-gated |
 | Integration I | Contracts, package/build inventory, dependencies, CI, cross-component evidence | Stream handoffs -> reviewed combined package and consumer evidence | Owns shared wiring; current |
 
 The workstream catalog is [workstreams/README.md](workstreams/README.md). It defines
 exclusive paths, prerequisites, handoff contents and parallel-ready gates. Component
 boundaries are durable; phase assignments may retain, consolidate, split or defer
-them. H2 is proposed, not dispatched. Existing flat public include paths remain
+them. H2 implementation and evidence are recorded in [its close record](phases/h2-delivery.md). Existing flat public include paths remain
 stable; new component folders are introduced only alongside consumed implementation.
 
 Dependency direction is T -> G, T -> R, G/R -> Q, G/R/Q -> X; I composes and validates.
@@ -30,6 +30,22 @@ dependent implementation proceeds. Public contract decisions belong in headers a
 docs/decisions; ownership/process decisions belong in the catalog and phase plan.
 
 ## Storage and algorithm contracts for H2
+
+The accepted [bounded-work decision](decisions/0002-bounded-regions-and-work.md)
+defines the implemented surface. AxialRegion stores constant-size metadata with
+checked uint64 count/index arithmetic. CandidateCells owns conservative rectangle
+metadata; construction and checked contiguous slices are O(1), traversal is O(emitted
+cells). CandidateCursor writes a caller-owned span and retains progress. Queries
+reject invalid/unrepresentable arithmetic, including normalized intervals outside
+the documented binary64 magnitude envelope. False positives remain explicit.
+
+The standalone SpatialIndex example owns preallocated current/pending dense bins.
+Count/scan/scatter rebuild phases and queries resume under explicit work budgets.
+Query work counts both cell visits and entity examinations, including mid-bin yields.
+Applications check deadlines between batches; a batch is a work bound, not a hard
+time guarantee. Input borrows expire on commit/fail/cancel; queries require their
+index to outlive them and are invalidated by publication. No concurrent mutation is
+allowed in this example. This is an application pattern, not exported grid storage.
 
 Lattice coordinate, region membership, compact cell index and application entity ID
 are distinct concepts. Region metadata describes storage addressing without owning
@@ -81,11 +97,13 @@ nanobench results establish only scalar costs. See [benchmarking](benchmarking.m
 
 ## Current scalar package
 
-The library has two facets: integer topology and floating world-space geometry.
+The library has four facets: topology, geometry, finite regions and candidates.
 
 - include/sub0hexgrid/Axial.hpp: Axial, Direction and checked neighbor/distance functions.
 - include/sub0hexgrid/Point.hpp: the two-coordinate world value.
 - include/sub0hexgrid/PointyLayout.hpp: validated radius/origin and conversion methods.
+- include/sub0hexgrid/regions/AxialRegion.hpp: checked compact finite indexing.
+- include/sub0hexgrid/candidates/: owned candidate range, slices and resumable cursor.
 - src/: scalar implementations; no mutable/global state or heap-backed storage.
 - examples/: executable consumer mapping cells and checking the topology.
 - tests/: independent rule/property fixtures and self-contained header translation units.

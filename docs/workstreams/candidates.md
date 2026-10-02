@@ -1,7 +1,8 @@
 # Q — Complete spatial candidate traversal
 
-Proposed H2 component; own future candidates folders and this brief. Depend on frozen
-G and R contracts. Receiving caller is Crucible radius traversal; application bins,
+Implemented H2 component: CandidateCells, slices and CandidateCursor. Own candidates
+folders and this brief. Depend on frozen G and R contracts. Receiving caller is the
+standalone spatial example; Crucible adoption remains H3. Application bins,
 exact entity filtering, identity and result sorting remain application-owned.
 
 Derive conservative inclusive world-disk bounds from the accepted pointy convention.

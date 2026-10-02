@@ -6,15 +6,35 @@ CPMAddPackage(
     GIT_TAG ${SUB0HEXGRID_DOCTEST_COMMIT}
     OPTIONS "DOCTEST_WITH_TESTS OFF" "DOCTEST_WITH_MAIN_IN_STATIC_LIB OFF" "DOCTEST_NO_INSTALL ON")
 
-add_executable(sub0hexgrid_tests kernel.cpp headers/axial.cpp headers/point.cpp headers/layout.cpp)
-target_link_libraries(sub0hexgrid_tests PRIVATE Sub0HexGrid::Sub0HexGrid doctest::doctest)
-target_compile_options(sub0hexgrid_tests PRIVATE
+function(sub0hexgrid_add_tests target label)
+    add_executable(${target} ${ARGN} ${PROJECT_SOURCE_DIR}/tests/main.cpp)
+    target_link_libraries(${target} PRIVATE Sub0HexGrid::Sub0HexGrid doctest::doctest)
+    target_compile_options(${target} PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/W4;/WX;/permissive->
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall;-Wextra;-Wpedantic;-Werror>)
+    sub0hexgrid_instrument(${target})
+    add_test(NAME ${label} COMMAND ${target})
+    set_tests_properties(${label} PROPERTIES LABELS ${label})
+endfunction()
+add_library(sub0hexgrid_headers OBJECT headers/axial.cpp headers/point.cpp headers/layout.cpp
+    headers/region.cpp headers/candidates.cpp headers/cursor.cpp)
+target_link_libraries(sub0hexgrid_headers PRIVATE Sub0HexGrid::Sub0HexGrid)
+target_compile_options(sub0hexgrid_headers PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4;/WX;/permissive->
     $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall;-Wextra;-Wpedantic;-Werror>)
-sub0hexgrid_instrument(sub0hexgrid_tests)
-add_test(NAME kernel COMMAND sub0hexgrid_tests)
+add_subdirectory(topology)
+add_subdirectory(geometry)
+add_subdirectory(regions)
+add_subdirectory(candidates)
+add_subdirectory(spatial)
+add_executable(sub0hexgrid_allocation_tests allocation.cpp)
+target_link_libraries(sub0hexgrid_allocation_tests PRIVATE Sub0HexGrid::Sub0HexGrid)
+sub0hexgrid_instrument(sub0hexgrid_allocation_tests)
+add_test(NAME allocation COMMAND sub0hexgrid_allocation_tests)
+set_tests_properties(allocation PROPERTIES LABELS allocation)
 if(SUB0HEXGRID_BUILD_EXAMPLES)
     add_test(NAME mapping_example COMMAND sub0hexgrid_example)
+    add_test(NAME spatial_example COMMAND sub0hexgrid_spatial)
 endif()
 add_test(NAME package_consumer COMMAND ${CMAKE_COMMAND}
     "-DPROJECT_BINARY=${PROJECT_BINARY_DIR}" "-DPROJECT_SOURCE=${PROJECT_SOURCE_DIR}"

@@ -1,8 +1,9 @@
 # R — Finite regions and compact indexing
 
-Proposed H2 component; no implementation dispatched. Own future regions folders
-listed in the catalog and this brief. Depend on T only. Receiving caller must be
-Crucible's spatial adapter; the application owns all backing field/entity storage.
+Implemented H2 component: AxialRegion, checked indexing and independent fixtures.
+Own regions folders listed in the catalog and this brief. Depend on T only.
+Receiving caller is the standalone spatial example and relocated consumer;
+Crucible adoption remains H3. Applications own backing field/entity storage.
 
 First freeze one consumed finite shape, membership, coordinate/index bijection,
 iteration order, capacity/index widths and checked dimension/byte arithmetic with I/Q.

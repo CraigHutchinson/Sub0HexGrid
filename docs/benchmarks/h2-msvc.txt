@@ -1,0 +1,250 @@
+H2 baseline: setup excluded; warm sequential queries; row-prefix consumption included.
+
+WORKLOAD 100000/uniform cells=100000 region_bytes=32 resident_index_payload_bytes=8800016 caller_points_bytes=1600000 nonempty_cells=100000 max_occupancy=1
+
+|           ns/sample |            sample/s |    err% |     total | 100000/uniform
+|--------------------:|--------------------:|--------:|----------:|:---------------
+|                7.69 |      130,039,011.70 |    0.1% |      0.00 | `mapping`
+|               19.36 |       51,660,897.87 |    1.7% |      0.01 | `bounded rebuild`
+|                3.27 |      305,748,063.60 |    0.6% |      0.00 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 100000/uniform
+|--------------------:|--------------------:|--------:|----------:|:---------------
+|                6.10 |      163,907,556.14 |    0.3% |      0.00 | `region index roundtrip`
+QUERY radius=2 count=4096 candidates=323718 hits=24447 examined=323718 rejected=299271 p95_us=1.3 p99_us=1.6
+
+|            ns/query |             query/s |    err% |     total | 100000/uniform
+|--------------------:|--------------------:|--------:|----------:|:---------------
+|              249.58 |        4,006,651.67 |    0.5% |      0.00 | `candidate traversal r=2`
+|              886.67 |        1,127,815.41 |    5.0% |      0.01 | :wavy_dash: `combined exact query r=2` (Unstable with ~1.0 iters. Increase `minEpochIterations` to e.g. 10)
+QUERY radius=8 count=4096 candidates=1393078 hits=315515 examined=1393078 rejected=1077563 p95_us=4.9 p99_us=9.9
+|              839.21 |        1,191,598.30 |    1.4% |      0.01 | `candidate traversal r=8`
+|            3,448.61 |          289,972.04 |    1.7% |      0.04 | `combined exact query r=8`
+
+WORKLOAD 100000/clustered cells=100000 region_bytes=32 resident_index_payload_bytes=8800016 caller_points_bytes=1600000 nonempty_cells=4096 max_occupancy=25
+
+|           ns/sample |            sample/s |    err% |     total | 100000/clustered
+|--------------------:|--------------------:|--------:|----------:|:-----------------
+|                8.31 |      120,351,426.16 |    0.1% |      0.00 | `mapping`
+|               16.86 |       59,304,946.03 |    1.9% |      0.00 | `bounded rebuild`
+|                3.15 |      317,762,948.84 |    0.4% |      0.00 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 100000/clustered
+|--------------------:|--------------------:|--------:|----------:|:-----------------
+|                6.55 |      152,683,410.95 |    7.6% |      0.00 | :wavy_dash: `region index roundtrip` (Unstable with ~1.3 iters. Increase `minEpochIterations` to e.g. 13)
+QUERY radius=2 count=4096 candidates=331776 hits=590924 examined=7550494 rejected=6959570 p95_us=7.9 p99_us=14.8
+
+|            ns/query |             query/s |    err% |     total | 100000/clustered
+|--------------------:|--------------------:|--------:|----------:|:-----------------
+|              271.02 |        3,689,757.68 |    4.4% |      0.00 | `candidate traversal r=2`
+|            6,730.59 |          148,575.37 |    0.8% |      0.08 | `combined exact query r=2`
+QUERY radius=8 count=4096 candidates=1462272 hits=7350019 examined=30599142 rejected=23249123 p95_us=34 p99_us=63.2
+|              854.76 |        1,169,918.03 |    0.4% |      0.01 | `candidate traversal r=8`
+|           27,622.02 |           36,203.00 |    0.1% |      0.34 | `combined exact query r=8`
+
+WORKLOAD 100000/border cells=100000 region_bytes=32 resident_index_payload_bytes=8800016 caller_points_bytes=1600000 nonempty_cells=200 max_occupancy=500
+
+|           ns/sample |            sample/s |    err% |     total | 100000/border
+|--------------------:|--------------------:|--------:|----------:|:--------------
+|                7.86 |      127,242,651.74 |    3.3% |      0.00 | `mapping`
+|               15.11 |       66,185,717.12 |    1.2% |      0.00 | `bounded rebuild`
+|                3.24 |      308,951,880.74 |    1.7% |      0.00 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 100000/border
+|--------------------:|--------------------:|--------:|----------:|:--------------
+|                6.37 |      157,084,511.47 |    4.6% |      0.00 | `region index roundtrip`
+QUERY radius=2 count=4096 candidates=180210 hits=6102500 examined=18021000 rejected=11918500 p95_us=16.7 p99_us=28.9
+
+|            ns/query |             query/s |    err% |     total | 100000/border
+|--------------------:|--------------------:|--------:|----------:|:--------------
+|              177.98 |        5,618,655.69 |    1.6% |      0.00 | `candidate traversal r=2`
+|           15,250.37 |           65,572.20 |    0.8% |      0.19 | `combined exact query r=2`
+QUERY radius=8 count=4096 candidates=733447 hits=18021000 examined=33338500 rejected=15317500 p95_us=31.4 p99_us=40.6
+|              491.41 |        2,034,976.15 |    3.7% |      0.01 | `candidate traversal r=8`
+|           28,948.00 |           34,544.70 |    1.8% |      0.36 | `combined exact query r=8`
+
+WORKLOAD 500000/uniform cells=500000 region_bytes=32 resident_index_payload_bytes=44000016 caller_points_bytes=8000000 nonempty_cells=500000 max_occupancy=1
+
+|           ns/sample |            sample/s |    err% |     total | 500000/uniform
+|--------------------:|--------------------:|--------:|----------:|:---------------
+|                8.06 |      124,087,953.54 |    2.1% |      0.01 | `mapping`
+|               24.51 |       40,793,349.05 |    3.3% |      0.04 | `bounded rebuild`
+|                3.33 |      299,922,020.27 |    2.1% |      0.00 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 500000/uniform
+|--------------------:|--------------------:|--------:|----------:|:---------------
+|                6.15 |      162,633,359.35 |    0.7% |      0.01 | `region index roundtrip`
+QUERY radius=2 count=4096 candidates=329560 hits=24540 examined=329560 rejected=305020 p95_us=4.9 p99_us=5.3
+
+|            ns/query |             query/s |    err% |     total | 500000/uniform
+|--------------------:|--------------------:|--------:|----------:|:---------------
+|              256.74 |        3,895,017.12 |    0.6% |      0.00 | `candidate traversal r=2`
+|            1,723.05 |          580,367.26 |    1.1% |      0.02 | `combined exact query r=2`
+QUERY radius=8 count=4096 candidates=1442319 hits=321365 examined=1442319 rejected=1120954 p95_us=11.5 p99_us=15.6
+|              882.37 |        1,133,307.51 |    0.7% |      0.01 | `candidate traversal r=8`
+|            6,173.19 |          161,990.71 |   13.9% |      0.09 | :wavy_dash: `combined exact query r=8` (Unstable with ~1.0 iters. Increase `minEpochIterations` to e.g. 10)
+
+WORKLOAD 500000/clustered cells=500000 region_bytes=32 resident_index_payload_bytes=44000016 caller_points_bytes=8000000 nonempty_cells=4096 max_occupancy=123
+
+|           ns/sample |            sample/s |    err% |     total | 500000/clustered
+|--------------------:|--------------------:|--------:|----------:|:-----------------
+|                8.20 |      121,882,846.21 |    1.3% |      0.01 | `mapping`
+|               16.95 |       59,004,012.27 |    0.5% |      0.03 | `bounded rebuild`
+|                3.30 |      303,379,649.29 |    0.1% |      0.01 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 500000/clustered
+|--------------------:|--------------------:|--------:|----------:|:-----------------
+|                6.27 |      159,601,634.32 |    1.2% |      0.01 | `region index roundtrip`
+QUERY radius=2 count=4096 candidates=331776 hits=2953577 examined=37741378 rejected=34787801 p95_us=58 p99_us=86.6
+
+|            ns/query |             query/s |    err% |     total | 500000/clustered
+|--------------------:|--------------------:|--------:|----------:|:-----------------
+|              251.59 |        3,974,769.53 |    1.9% |      0.00 | `candidate traversal r=2`
+|           46,995.95 |           21,278.43 |    0.3% |      0.58 | `combined exact query r=2`
+QUERY radius=8 count=4096 candidates=1462272 hits=36741260 examined=153026418 rejected=116285158 p95_us=234.5 p99_us=279.5
+|              872.34 |        1,146,343.51 |    0.9% |      0.01 | `candidate traversal r=8`
+|          190,150.98 |            5,258.98 |    0.9% |      2.37 | `combined exact query r=8`
+
+WORKLOAD 500000/border cells=500000 region_bytes=32 resident_index_payload_bytes=44000016 caller_points_bytes=8000000 nonempty_cells=1000 max_occupancy=500
+
+|           ns/sample |            sample/s |    err% |     total | 500000/border
+|--------------------:|--------------------:|--------:|----------:|:--------------
+|                7.95 |      125,858,987.59 |    2.6% |      0.01 | `mapping`
+|               17.69 |       56,522,083.18 |    1.4% |      0.03 | `bounded rebuild`
+|                3.49 |      286,894,652.28 |    0.8% |      0.01 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 500000/border
+|--------------------:|--------------------:|--------:|----------:|:--------------
+|                6.59 |      151,694,426.75 |    8.0% |      0.01 | :wavy_dash: `region index roundtrip` (Unstable with ~1.0 iters. Increase `minEpochIterations` to e.g. 10)
+QUERY radius=2 count=4096 candidates=183495 hits=6135500 examined=18349500 rejected=12214000 p95_us=27.3 p99_us=41
+
+|            ns/query |             query/s |    err% |     total | 500000/border
+|--------------------:|--------------------:|--------:|----------:|:--------------
+|              190.94 |        5,237,181.95 |    4.4% |      0.00 | `candidate traversal r=2`
+|           18,445.36 |           54,214.17 |    0.8% |      0.23 | `combined exact query r=2`
+QUERY radius=8 count=4096 candidates=759440 hits=18349500 examined=34520000 rejected=16170500 p95_us=36.8 p99_us=66.6
+|              508.11 |        1,968,095.33 |    0.4% |      0.01 | `candidate traversal r=8`
+|           33,443.63 |           29,901.06 |    0.2% |      0.41 | `combined exact query r=8`
+
+WORKLOAD 1000000/uniform cells=1000000 region_bytes=32 resident_index_payload_bytes=88000016 caller_points_bytes=16000000 nonempty_cells=1000000 max_occupancy=1
+
+|           ns/sample |            sample/s |    err% |     total | 1000000/uniform
+|--------------------:|--------------------:|--------:|----------:|:----------------
+|                8.14 |      122,809,387.55 |    0.5% |      0.02 | `mapping`
+|               44.19 |       22,631,449.11 |    4.3% |      0.13 | `bounded rebuild`
+|                3.44 |      290,799,115.97 |    0.5% |      0.01 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 1000000/uniform
+|--------------------:|--------------------:|--------:|----------:|:----------------
+|                6.09 |      164,106,603.65 |    0.1% |      0.02 | `region index roundtrip`
+QUERY radius=2 count=4096 candidates=330298 hits=24550 examined=330298 rejected=305748 p95_us=5.7 p99_us=6.4
+
+|            ns/query |             query/s |    err% |     total | 1000000/uniform
+|--------------------:|--------------------:|--------:|----------:|:----------------
+|              274.22 |        3,646,723.65 |   10.0% |      0.00 | :wavy_dash: `candidate traversal r=2` (Unstable with ~1.0 iters. Increase `minEpochIterations` to e.g. 10)
+|            3,872.73 |          258,215.81 |    3.8% |      0.05 | `combined exact query r=2`
+QUERY radius=8 count=4096 candidates=1448470 hits=322100 examined=1448470 rejected=1126370 p95_us=14.1 p99_us=16.9
+|              909.67 |        1,099,302.20 |    3.3% |      0.01 | `candidate traversal r=8`
+|           11,277.56 |           88,671.64 |    4.3% |      0.14 | `combined exact query r=8`
+
+WORKLOAD 1000000/clustered cells=1000000 region_bytes=32 resident_index_payload_bytes=88000016 caller_points_bytes=16000000 nonempty_cells=4096 max_occupancy=245
+
+|           ns/sample |            sample/s |    err% |     total | 1000000/clustered
+|--------------------:|--------------------:|--------:|----------:|:------------------
+|                8.75 |      114,340,597.77 |    1.3% |      0.03 | `mapping`
+|               18.18 |       55,005,500.55 |    2.2% |      0.05 | `bounded rebuild`
+|                3.42 |      292,175,539.06 |    0.2% |      0.01 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 1000000/clustered
+|--------------------:|--------------------:|--------:|----------:|:------------------
+|                6.34 |      157,681,451.93 |    0.4% |      0.02 | `region index roundtrip`
+QUERY radius=2 count=4096 candidates=331776 hits=5907963 examined=75483651 rejected=69575688 p95_us=161.2 p99_us=371.2
+
+|            ns/query |             query/s |    err% |     total | 1000000/clustered
+|--------------------:|--------------------:|--------:|----------:|:------------------
+|              264.84 |        3,775,811.21 |    0.2% |      0.00 | `candidate traversal r=2`
+|          119,441.24 |            8,372.32 |    9.0% |      1.48 | :wavy_dash: `combined exact query r=2` (Unstable with ~1.0 iters. Increase `minEpochIterations` to e.g. 10)
+QUERY radius=8 count=4096 candidates=1462272 hits=73478523 examined=306143532 rejected=232665009 p95_us=653.4 p99_us=828.5
+|              860.30 |        1,162,381.52 |    0.8% |      0.01 | `candidate traversal r=8`
+|          462,373.51 |            2,162.75 |    0.8% |      5.66 | `combined exact query r=8`
+
+WORKLOAD 1000000/border cells=1000000 region_bytes=32 resident_index_payload_bytes=88000016 caller_points_bytes=16000000 nonempty_cells=2000 max_occupancy=500
+
+|           ns/sample |            sample/s |    err% |     total | 1000000/border
+|--------------------:|--------------------:|--------:|----------:|:---------------
+|                8.01 |      124,920,363.27 |    0.4% |      0.02 | `mapping`
+|               18.42 |       54,288,227.06 |    0.0% |      0.06 | `bounded rebuild`
+|                3.49 |      286,541,161.64 |    0.8% |      0.01 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 1000000/border
+|--------------------:|--------------------:|--------:|----------:|:---------------
+|                6.17 |      162,079,808.10 |    0.9% |      0.02 | `region index roundtrip`
+QUERY radius=2 count=4096 candidates=183900 hits=6139500 examined=18390000 rejected=12250500 p95_us=36.2 p99_us=58
+
+|            ns/query |             query/s |    err% |     total | 1000000/border
+|--------------------:|--------------------:|--------:|----------:|:---------------
+|              179.57 |        5,569,000.68 |    2.0% |      0.00 | `candidate traversal r=2`
+|           21,164.50 |           47,248.93 |    0.3% |      0.26 | `combined exact query r=2`
+QUERY radius=8 count=4096 candidates=762696 hits=18390000 examined=34668000 rejected=16278000 p95_us=49 p99_us=78.3
+|              494.29 |        2,023,115.68 |    0.1% |      0.01 | `candidate traversal r=8`
+|           40,258.91 |           24,839.22 |    0.5% |      0.50 | `combined exact query r=8`
+
+WORKLOAD 1000000/coincident cells=100000 region_bytes=32 resident_index_payload_bytes=59200016 caller_points_bytes=16000000 nonempty_cells=1 max_occupancy=1000000
+
+|           ns/sample |            sample/s |    err% |     total | 1000000/coincident
+|--------------------:|--------------------:|--------:|----------:|:-------------------
+|                7.32 |      136,559,785.87 |    5.8% |      0.02 | :wavy_dash: `mapping` (Unstable with ~1.0 iters. Increase `minEpochIterations` to e.g. 10)
+|               12.39 |       80,704,387.90 |    1.3% |      0.04 | `bounded rebuild`
+|                3.35 |      298,364,960.02 |    0.7% |      0.01 | `exact distance predicate`
+
+|             ns/cell |              cell/s |    err% |     total | 1000000/coincident
+|--------------------:|--------------------:|--------:|----------:|:-------------------
+|                7.69 |      130,022,103.76 |    0.6% |      0.00 | `region index roundtrip`
+QUERY radius=2 count=64 candidates=5184 hits=64000000 examined=64000000 rejected=0 p95_us=3758.7 p99_us=5508.5
+
+|            ns/query |             query/s |    err% |     total | 1000000/coincident
+|--------------------:|--------------------:|--------:|----------:|:-------------------
+|              244.84 |        4,084,316.38 |    1.6% |      0.00 | `candidate traversal r=2`
+|        3,408,623.44 |              293.37 |    0.1% |      0.65 | `combined exact query r=2`
+QUERY radius=8 count=64 candidates=22848 hits=64000000 examined=64000000 rejected=0 p95_us=3669 p99_us=4776.3
+|              917.37 |        1,090,071.14 |    0.6% |      0.00 | `candidate traversal r=8`
+|        3,498,515.62 |              285.84 |    0.1% |      0.67 | `combined exact query r=8`
+
+WORKLOAD 0/empty cells=100000 region_bytes=32 resident_index_payload_bytes=3200016 caller_points_bytes=0 nonempty_cells=0 max_occupancy=0
+
+|           ns/sample |            sample/s |    err% |     total | 0/empty
+|--------------------:|--------------------:|--------:|----------:|:--------
+|                0.20 |    4,969,757,651.29 |    2.5% |      0.00 | `mapping`
+|          311,750.00 |            3,207.70 |    0.0% |      0.00 | `bounded rebuild`
+|                0.25 |    4,078,211,594.20 |   17.6% |      0.00 | :wavy_dash: `exact distance predicate` (Unstable with ~3,891,190.7 iters. Increase `minEpochIterations` to e.g. 38911907)
+
+|             ns/cell |              cell/s |    err% |     total | 0/empty
+|--------------------:|--------------------:|--------:|----------:|:--------
+|                6.30 |      158,629,441.62 |    2.3% |      0.00 | `region index roundtrip`
+QUERY radius=2 count=64 candidates=2830 hits=0 examined=0 rejected=0 p95_us=0.3 p99_us=0.4
+
+|            ns/query |             query/s |    err% |     total | 0/empty
+|--------------------:|--------------------:|--------:|----------:|:--------
+|              167.68 |        5,963,890.51 |    0.6% |      0.00 | `candidate traversal r=2`
+|              236.54 |        4,227,642.28 |    2.7% |      0.00 | `combined exact query r=2`
+QUERY radius=8 count=64 candidates=11601 hits=0 examined=0 rejected=0 p95_us=0.7 p99_us=0.7
+|              486.08 |        2,057,294.13 |    1.5% |      0.00 | `candidate traversal r=8`
+|              627.06 |        1,594,737.37 |    1.3% |      0.00 | `combined exact query r=8`
+
+WORKLOAD 1000000/uniform/large cells=100000 region_bytes=32 resident_index_payload_bytes=59200016 caller_points_bytes=16000000 nonempty_cells=100000 max_occupancy=10
+
+|           ns/sample |            sample/s |    err% |     total | 1000000/uniform/large
+|--------------------:|--------------------:|--------:|----------:|:----------------------
+|                8.30 |      120,502,253.39 |    2.2% |      0.03 | `mapping`
+|               20.90 |       47,836,132.54 |    1.9% |      0.06 | `bounded rebuild`
+|                3.46 |      289,251,417.33 |    7.4% |      0.01 | :wavy_dash: `exact distance predicate` (Unstable with ~1.0 iters. Increase `minEpochIterations` to e.g. 10)
+
+|             ns/cell |              cell/s |    err% |     total | 1000000/uniform/large
+|--------------------:|--------------------:|--------:|----------:|:----------------------
+|                6.09 |      164,271,047.23 |    0.1% |      0.00 | `region index roundtrip`
+QUERY radius=1000 count=64 candidates=6342300 hits=51968590 examined=63423000 rejected=11454410 p95_us=7651.8 p99_us=9081.1
+
+|            ns/query |             query/s |    err% |     total | 1000000/uniform/large
+|--------------------:|--------------------:|--------:|----------:|:----------------------
+|          220,382.81 |            4,537.56 |    0.7% |      0.04 | `candidate traversal r=1000`
+|        6,642,460.94 |              150.55 |    1.4% |      1.28 | `combined exact query r=1000`
