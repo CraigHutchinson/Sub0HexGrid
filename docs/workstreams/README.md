@@ -4,12 +4,15 @@ Architecture is the contract authority. This catalog follows Crucible's separati
 of durable components from phase-specific agent assignments. Status is capability
 status, not an active file claim. Read AGENTS.md, architecture.md, work-breakdown.md,
 the stream brief and ACTIVE_WORK_LOG.md before starting.
+The [responsibility map](responsibilities.md) resolves hierarchy/acceleration
+boundaries and cross-project handoffs. Each component owns its semantics; I owns
+shared inventories/coordination. A private spike is not a production component.
 
 | ID | Brief | Exclusive implementation paths | State / receiving caller |
 |---|---|---|---|
 | I | [Integration](integration.md) | Root CMake, cmake/, presets, CI, AGENTS, central docs, examples/, tests/consumer and headers; benchmarks/kernel.cpp and spatial.cpp | Package/examples, H2 combined evidence |
-| T | [Topology](topology.md) | include/sub0hexgrid/Axial.hpp, src/Axial.cpp; future tests/topology/, benchmarks/topology/ | Implemented scalar; example/package |
-| G | [Geometry](geometry.md) | include/sub0hexgrid/Point.hpp and PointyLayout.hpp, src/PointyLayout.cpp; future tests/geometry/, benchmarks/geometry/ | Implemented scalar; example/package |
+| T | [Topology](topology.md) | include/sub0hexgrid/Axial.hpp, src/Axial.cpp, tests/topology/; future benchmarks/topology/ | Implemented scalar; example/package |
+| G | [Geometry](geometry.md) | include/sub0hexgrid/Point.hpp and PointyLayout.hpp, src/PointyLayout.cpp, tests/geometry/; future benchmarks/geometry/ | Implemented scalar; example/package |
 | R | [Regions](regions.md) | include/sub0hexgrid/regions/, src/regions/, tests/regions/; future benchmarks/regions/ | Implemented; standalone spatial/package consumer |
 | Q | [Candidates](candidates.md) | include/sub0hexgrid/candidates/, src/candidates/, tests/candidates/; future benchmarks/candidates/ | Implemented; standalone spatial/package consumer |
 | H | [Hierarchy](hierarchy.md) | docs/research/hierarchy.md, hierarchy-experiments.md and H brief; private spike paths assigned per phase, production code after HH-09 | Prioritized game-use experiments defined; competing spikes and measured architecture selection pending |
@@ -17,8 +20,8 @@ the stream brief and ACTIVE_WORK_LOG.md before starting.
 
 Each stream owns its named brief. New folders/manifests are planned boundaries,
 not existing code or reserved targets. Existing scalar headers are not moved just
-to fit a folder pattern. Shared tests must be split preserving fixtures before T/G
-can edit independently; until then they submit exact patches to I.
+to fit a folder pattern. T/G fixtures are split and component-owned. Shared header/
+package/allocation checks and combined benchmark registration remain I-owned.
 
 Phase plans and close records live in [phases/README.md](../phases/README.md).
 The [next H2 sprint](../phases/h2-bounded-spatial.md) selects I + R/Q with explicit
@@ -51,7 +54,9 @@ boundary rules or ordering in another module.
   unchanged dependency contract is agreed.
 - R may develop against frozen T. Q may research and write independent oracles while
   R is developed, but its implementation waits for the region/index contract.
-- X may specify parity fixtures after G/R/Q contracts freeze; adapter work waits for
+- H requires frozen T/G/R conventions and private protocol before competing spikes;
+  Q stays the independent fine oracle. Production geometry waits for HH-09 and a caller.
+- X may specify parity fixtures after selected G/R/Q and optional H contracts freeze; adapter work waits for
   a named backend caller and capability audit.
 - Package validation can proceed on an immutable handoff commit. CPU-heavy tests,
   measurements and shared build directories are never implicitly parallel-safe.

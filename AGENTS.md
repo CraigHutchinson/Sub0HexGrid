@@ -17,6 +17,14 @@ skills/parallel-workstreams/SKILL.md. Follow docs/workstreams/README.md and the
 component brief. Architecture defines dependencies; the phase plan defines current
 assignments. Planning does not dispatch agents or implement H2/H3 automatically.
 Reassess retain/consolidate/split/defer at phase start and record reasons.
+Read docs/workstreams/responsibilities.md before hierarchy/acceleration work.
+Each artifact/contract has one defining owner; affected consumers review changes
+through I. H owns grouping/coverage, Q fine candidates, application Spatial occupied
+indexes, Presentation view policy, and external adapters device execution. Private
+spike ownership is phase-specific and never changes production ownership implicitly.
+When adding a cross-cutting axis, audit every stream brief and the dependency/map
+handoffs, not only the new stream. Resolve overlaps/unassigned artifacts before
+dispatch and carry defining owners into the phase protocol and close record.
 
 The integrator owns shared contracts, root CMake/exports, cmake/dependency pins,
 presets, CI, central docs and current shared fixtures. Independent workers edit

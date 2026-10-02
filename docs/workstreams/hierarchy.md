@@ -11,6 +11,9 @@ descendant coverage and the distinction between exact queries and zoom/LOD summa
 It builds on T/G/R conventions and preserves Q's reference semantics; no circular
 Q/H source dependency is proposed. It does not own ECS entities, application occupancy,
 rendering policy, task scheduling, GPU memory or native compute dispatch.
+H owns parent geometry and composed coverage, not production occupied traversal or
+frontier storage. Those belong to application Spatial. See the
+[responsibility map](responsibilities.md) for H/G/R/Q/X and consumer handoffs.
 
 Exclusive current paths: this brief, docs/research/hierarchy.md and
 docs/research/hierarchy-experiments.md. The integrator

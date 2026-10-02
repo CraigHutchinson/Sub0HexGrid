@@ -7,6 +7,9 @@ whether and how they integrate across Sub0HexGrid, Crucible and Sub0ECS. Initial
 [research](../research/hierarchy.md) and cross-repository read-only review are complete.
 The [use-case/experiment programme](../research/hierarchy-experiments.md) specifies
 priorities, spike options, workload packs and evidence rules. No tree API is selected.
+Use the [responsibility map](../workstreams/responsibilities.md) before assigning
+each spike or consumer: defining semantics and production paths stay with their
+stream, even when a private experiment implements several layers for measurement.
 H2 remains the fine-grid reference. HX-05 tighter local candidates is a separate
 complementary refinement, not a substitute for this hierarchy investigation.
 

@@ -4,9 +4,12 @@ Implemented H2 component: AxialRegion, checked indexing and independent fixtures
 Own regions folders listed in the catalog and this brief. Depend on T only.
 Receiving caller is the standalone spatial example and relocated consumer;
 Crucible adoption remains H3. Applications own backing field/entity storage.
+R owns fine-region indices; H owns distinct parent/group keys. Neither owns sparse
+occupied directories or device residency. Fine ordering cannot change to locality
+curve order implicitly. See the [responsibility map](responsibilities.md).
 
-First freeze one consumed finite shape, membership, coordinate/index bijection,
-iteration order, capacity/index widths and checked dimension/byte arithmetic with I/Q.
+Maintain accepted shape, membership, coordinate/index bijection, iteration order and
+checked capacity/index widths; changes involve I/Q/H callers.
 Region descriptors are immutable metadata, not a generic owning grid. Chunk directories,
 terrain fields and application world identity remain outside this increment.
 

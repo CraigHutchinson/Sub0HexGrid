@@ -1,13 +1,18 @@
 # X — External accelerator interoperability
 
 Proposed consumer-gated component, not a native GPU backend. Own future interop
-headers/fixtures and this brief. Depend on frozen G/R/Q contracts. First identify a
+headers/fixtures and this brief. Consume selected frozen G/R/Q contracts, and H
+when hierarchical data is exchanged. X is never a scalar-facet dependency. Identify a
 real external CUDA or Vulkan compute caller and inspect its hardware/API capabilities.
 
 Define explicit fixed-width descriptors, buffer strides/alignment, validity, index
 limits and CPU/backend precision/seam equivalence. Validate C++ and shader layouts;
 do not upload optional/private-object bytes. Backend kernels, device allocation,
 dispatch, barriers, queues and completion ownership stay in the receiving project.
+Spatial owns the host occupied index; the external adapter owns its device mirror
+and completion lifetime. H supplies grouping/coverage, not GPU execution. Runtime
+chooses scheduling policy; Scheduling/adapters implement joins. See the
+[responsibility map](responsibilities.md).
 
 Fixtures compare integer results exactly and geometry/candidates under the declared
 policy. Capacity failures and partition boundaries must preserve completeness.
