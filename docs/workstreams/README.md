@@ -20,6 +20,9 @@ to fit a folder pattern. Shared tests must be split preserving fixtures before T
 can edit independently; until then they submit exact patches to I.
 
 Phase plans and close records live in [phases/README.md](../phases/README.md).
+The [next H2 sprint](../phases/h2-bounded-spatial.md) selects I + R/Q with explicit
+contract/fixture handoffs; T/G maintenance is consolidated with I and X is deferred.
+It is a plan, not a dispatch or an implementation claim.
 
 ## Dispatch and shared surfaces
 
