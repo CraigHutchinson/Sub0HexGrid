@@ -10,4 +10,4 @@ A proposed phase does not launch agents.
 |---|---|---|
 | H0/H1 scalar initialization | Delivered at 59eddb5 | [Review](../review.md), [validation](../validation.md) |
 | Tooling and workstream boundaries | Local/cross-platform gates passed; [PR 2](https://github.com/CraigHutchinson/Sub0HexGrid/pull/2) records delivery | [Record](tooling-and-boundaries.md) |
-| H2 region/query design | Proposed; no implementation assigned | [Catalog](../workstreams/README.md) |
+| H2 bounded spatial foundation | Next sprint defined; not dispatched | [Sprint plan](h2-bounded-spatial.md), [catalog](../workstreams/README.md) |

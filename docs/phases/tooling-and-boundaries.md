@@ -1,4 +1,4 @@
-# Tooling and workstream boundaries — 2026-10-02
+# Tooling and workstream boundaries â€” 2026-10-02
 
 Base: 59eddb5. Outcome: CPM-backed doctest/nanobench tooling and independent-agent
 component boundaries. Owner: Codex integrator; branch test/doctest-nanobench.
