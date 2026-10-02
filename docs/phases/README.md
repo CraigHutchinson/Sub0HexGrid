@@ -11,4 +11,4 @@ A proposed phase does not launch agents.
 | H0/H1 scalar initialization | Delivered at 59eddb5 | [Review](../review.md), [validation](../validation.md) |
 | Tooling and workstream boundaries | Local/cross-platform gates passed; [PR 2](https://github.com/CraigHutchinson/Sub0HexGrid/pull/2) records delivery | [Record](tooling-and-boundaries.md) |
 | H2 bounded spatial foundation | Implemented; delivery checks recorded in PR | [Close record](h2-delivery.md), [original sprint](h2-bounded-spatial.md), [catalog](../workstreams/README.md) |
-| Hierarchy evaluation | Initial research/integration audit complete; architecture and comparison gates defined | [Phase](hierarchy-research.md), [research](../research/hierarchy.md), [H brief](../workstreams/hierarchy.md) |
+| Hierarchy evaluation | Initial research complete; prioritized game-use and multi-round competing-spike programme defined; measurements pending | [Phases A-D](hierarchy-research.md), [experiments](../research/hierarchy-experiments.md), [H brief](../workstreams/hierarchy.md) |
