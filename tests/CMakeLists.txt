@@ -1,5 +1,13 @@
+include(${PROJECT_SOURCE_DIR}/cmake/get_cpm.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/DependencyPins.cmake)
+CPMAddPackage(
+    NAME doctest
+    GITHUB_REPOSITORY doctest/doctest
+    GIT_TAG ${SUB0HEXGRID_DOCTEST_COMMIT}
+    OPTIONS "DOCTEST_WITH_TESTS OFF" "DOCTEST_WITH_MAIN_IN_STATIC_LIB OFF" "DOCTEST_NO_INSTALL ON")
+
 add_executable(sub0hexgrid_tests kernel.cpp headers/axial.cpp headers/point.cpp headers/layout.cpp)
-target_link_libraries(sub0hexgrid_tests PRIVATE Sub0HexGrid::Sub0HexGrid)
+target_link_libraries(sub0hexgrid_tests PRIVATE Sub0HexGrid::Sub0HexGrid doctest::doctest)
 target_compile_options(sub0hexgrid_tests PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4;/WX;/permissive->
     $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall;-Wextra;-Wpedantic;-Werror>)

@@ -14,9 +14,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
-      - run: cmake --preset ${{ matrix.preset }}
+      - run: cmake --preset ${{ matrix.preset }} -DSUB0HEXGRID_BUILD_BENCHMARKS=ON
       - run: cmake --build --preset ${{ matrix.preset }} --parallel 4
       - run: ctest --preset ${{ matrix.preset }}
+      - run: ./build/${{ matrix.preset }}/benchmarks/sub0hexgrid_benchmarks
+        if: matrix.preset == 'release'
   sanitize:
     runs-on: ubuntu-24.04
     env:

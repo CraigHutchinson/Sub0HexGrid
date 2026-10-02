@@ -9,6 +9,9 @@ topological distance and validated pointy-top world/cell mapping. The example an
 installed-package consumer exercise these APIs. Finite regions, complete query
 candidate traversal and Crucible migration are subsequent gated increments.
 
+The [workstream catalog](docs/workstreams/README.md) defines component ownership and
+independent-agent handoffs; [benchmarking](docs/benchmarking.md) defines timing scope.
+
 Read [requirements](docs/requirements.md), [architecture](docs/architecture.md),
 [numerical decisions](docs/decisions/0001-coordinate-layout.md), and
 [work breakdown](docs/work-breakdown.md). [Validation](docs/validation.md) records
@@ -16,7 +19,9 @@ actual checks and limits. No performance or full-world hex migration claim is ma
 
 ## Build and use
 
-Requires CMake 3.25+, Ninja and a C++23 toolchain. There are no external dependencies.
+Requires CMake 3.25+, Ninja and a C++23 toolchain. The runtime library has no external
+dependencies. Tests use doctest and optional benchmarks use nanobench, fetched through
+CPM at pinned commits; first configuration requires network access or a populated CPM cache.
 
 ```sh
 cmake --preset debug
