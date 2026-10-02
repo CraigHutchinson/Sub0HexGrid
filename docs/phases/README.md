@@ -9,5 +9,5 @@ A proposed phase does not launch agents.
 | Increment | Status | Record |
 |---|---|---|
 | H0/H1 scalar initialization | Delivered at 59eddb5 | [Review](../review.md), [validation](../validation.md) |
-| Tooling and workstream boundaries | Local gates passed; GitHub records delivery | [Record](tooling-and-boundaries.md) |
+| Tooling and workstream boundaries | Local/cross-platform gates passed; [PR 2](https://github.com/CraigHutchinson/Sub0HexGrid/pull/2) records delivery | [Record](tooling-and-boundaries.md) |
 | H2 region/query design | Proposed; no implementation assigned | [Catalog](../workstreams/README.md) |

@@ -26,7 +26,10 @@ Cpp-review plan/code self-review checked executable callers, private dependencie
 explicit sources, benchmark setup/dead-code protection, unchanged numerical fixtures
 and package boundaries. It corrected the benchmark command to its benchmarks/
 subdirectory before delivery. No unresolved blocking finding; not independent review.
-Linux/sanitizer and exact-head delivery evidence is supplied by PR CI.
+Exact-head CI passed for f0a53ae3375eb8f4c74fa07bd0ee4becc2097f48: Linux and
+Windows Debug/Release plus ASan/UBSan, including Release benchmark smoke.
+[PR 2](https://github.com/CraigHutchinson/Sub0HexGrid/pull/2) records final delivery
+and the merge baseline.
 
 ## Follow-ups and next split
 
