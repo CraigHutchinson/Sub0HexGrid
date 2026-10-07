@@ -4,10 +4,10 @@
 #include <iterator>
 #include <optional>
 
-#include <sub0hexgrid/Axial.hpp>
-#include <sub0hexgrid/Point.hpp>
-#include <sub0hexgrid/PointyLayout.hpp>
-#include <sub0hexgrid/regions/AxialRegion.hpp>
+#include "sub0hexgrid/Axial.hpp"
+#include "sub0hexgrid/Point.hpp"
+#include "sub0hexgrid/PointyLayout.hpp"
+#include "sub0hexgrid/regions/AxialRegion.hpp"
 
 namespace sub0hexgrid {
 /** Allocation-free conservative candidates for an inclusive world-space disk.

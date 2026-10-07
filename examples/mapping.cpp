@@ -1,7 +1,7 @@
 #include <array>
 #include <iostream>
 
-#include <sub0hexgrid/PointyLayout.hpp>
+#include "sub0hexgrid/PointyLayout.hpp"
 
 int main() {
     using namespace sub0hexgrid;

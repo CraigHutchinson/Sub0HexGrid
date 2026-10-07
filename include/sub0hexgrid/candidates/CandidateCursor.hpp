@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <span>
 
-#include <sub0hexgrid/candidates/CandidateCells.hpp>
+#include "sub0hexgrid/candidates/CandidateCells.hpp"
 
 namespace sub0hexgrid {
 /** Resumable candidate traversal with caller-owned, workload-bounded output.

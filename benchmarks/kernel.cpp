@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include <nanobench.h>
-#include <sub0hexgrid/PointyLayout.hpp>
+#include "sub0hexgrid/PointyLayout.hpp"
 
 int main() {
     using namespace sub0hexgrid;

@@ -11,7 +11,7 @@
 #include <queue>
 #include <string_view>
 
-#include <sub0hexgrid/PointyLayout.hpp>
+#include "sub0hexgrid/PointyLayout.hpp"
 
 namespace {
 void Check(bool condition, std::string_view message) {

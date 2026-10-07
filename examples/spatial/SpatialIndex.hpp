@@ -10,7 +10,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include <sub0hexgrid/candidates/CandidateCursor.hpp>
+#include "sub0hexgrid/candidates/CandidateCursor.hpp"
 
 namespace sub0hexgrid::example {
 /// Application-owned bins demonstrating resumable builds and snapshot-bound queries.

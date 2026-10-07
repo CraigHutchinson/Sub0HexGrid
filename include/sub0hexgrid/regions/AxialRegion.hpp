@@ -4,7 +4,7 @@
 #include <optional>
 #include <type_traits>
 
-#include <sub0hexgrid/Axial.hpp>
+#include "sub0hexgrid/Axial.hpp"
 
 namespace sub0hexgrid {
 /** Validated finite axial rectangle addressing application-owned contiguous storage.

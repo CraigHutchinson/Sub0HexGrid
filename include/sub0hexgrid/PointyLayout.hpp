@@ -2,8 +2,8 @@
 
 #include <optional>
 
-#include <sub0hexgrid/Axial.hpp>
-#include <sub0hexgrid/Point.hpp>
+#include "sub0hexgrid/Axial.hpp"
+#include "sub0hexgrid/Point.hpp"
 
 namespace sub0hexgrid {
 /// Validated regular pointy-top geometry. Const operations are stateless/allocation-free.
