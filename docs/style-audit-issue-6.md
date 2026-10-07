@@ -152,6 +152,9 @@ configurations, doctest counts match the recorded baseline exactly: topology
 47,765; geometry 4,971; regions 4,441; candidates 29,836; spatial 25,106.
 The original scalar total remains 52,736 (topology plus geometry). Allocation
 instrumentation, examples and package checks also passed in both configurations.
+GitHub exact-head workflow [37616561347](https://github.com/CraigHutchinson/Sub0HexGrid/actions/runs/37616561347)
+passed Linux and Windows Debug/Release plus sanitizer jobs. PR #8 merged at
+`3994e900cdb609f4b497efc7d6819616e3aeb888` on 2026-10-07.
 
 ### Machine-readable tally
 
