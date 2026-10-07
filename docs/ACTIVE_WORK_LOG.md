@@ -22,4 +22,4 @@ current Crucible main and standing consumer/foundation methodology. Documentatio
 only, no CPU reservation; final PR/CI delivery follows. Crucible now consumes the
 H2 pin aaae5c2; the earlier H3-unstarted status above is historical.
 
-| Codex | Complete local; PR/CI pending | Issue #6 style audit and API/path migration; Debug/Release all 9 CTest pass with unchanged assertion totals | 2026-10-07 / 9791bee / fix/issue-6-sub0-style |
+| Codex | Complete; PR #8 merged | Issue #6 style audit/API/path migration; MSVC Debug/Release 9/9 and exact-head Linux/Windows Debug/Release/sanitizer CI passed; 52,736 scalar assertions preserved | 2026-10-07 / 9791bee -> 3994e90 / fix/issue-6-sub0-style |
