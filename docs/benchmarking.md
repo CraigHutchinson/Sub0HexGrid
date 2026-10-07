@@ -10,7 +10,7 @@ Run Release on an uncontended host, record exact commit/config/compiler/hardware
 input distribution, epochs, working-set size, residency and all reported instability.
 Compare rotated/interleaved arms and repeat only as needed to resolve uncertainty.
 Do not use CI shared-runner timing as an acceptance threshold; CI smoke proves the
-harness executes. Check resource claims before local runs and never infer claim expiry.
+harness executes. check resource claims before local runs and never infer claim expiry.
 
 H2 requires resident/peak scratch bytes, rebuild/query time, candidate amplification,
 occupancy distribution and p95/p99 consumer latency at 100k/500k/1m entities where

@@ -2,7 +2,7 @@
 
 Architecture is the contract authority. This catalog follows Crucible's separation
 of durable components from phase-specific agent assignments. Status is capability
-status, not an active file claim. Read AGENTS.md, architecture.md, work-breakdown.md,
+status, not an active file claim. read AGENTS.md, architecture.md, work-breakdown.md,
 the stream brief and ACTIVE_WORK_LOG.md before starting.
 The [responsibility map](responsibilities.md) resolves hierarchy/acceleration
 boundaries and cross-project handoffs. Each component owns its semantics; I owns
@@ -11,8 +11,8 @@ shared inventories/coordination. A private spike is not a production component.
 | ID | Brief | Exclusive implementation paths | State / receiving caller |
 |---|---|---|---|
 | I | [Integration](integration.md) | Root CMake, cmake/, presets, CI, AGENTS, central docs, examples/, tests/consumer and headers; benchmarks/kernel.cpp and spatial.cpp | Package/examples, H2 combined evidence |
-| T | [Topology](topology.md) | include/sub0hexgrid/Axial.hpp, src/Axial.cpp, tests/topology/; future benchmarks/topology/ | Implemented scalar; example/package |
-| G | [Geometry](geometry.md) | include/sub0hexgrid/Point.hpp and PointyLayout.hpp, src/PointyLayout.cpp, tests/geometry/; future benchmarks/geometry/ | Implemented scalar; example/package |
+| T | [Topology](topology.md) | include/sub0hexgrid/axial.hpp, src/axial.cpp, tests/topology/; future benchmarks/topology/ | Implemented scalar; example/package |
+| G | [Geometry](geometry.md) | include/sub0hexgrid/point.hpp and pointy_layout.hpp, src/pointy_layout.cpp, tests/geometry/; future benchmarks/geometry/ | Implemented scalar; example/package |
 | R | [Regions](regions.md) | include/sub0hexgrid/regions/, src/regions/, tests/regions/; future benchmarks/regions/ | Implemented; standalone spatial/package consumer |
 | Q | [Candidates](candidates.md) | include/sub0hexgrid/candidates/, src/candidates/, tests/candidates/; future benchmarks/candidates/ | Implemented; standalone spatial/package consumer |
 | H | [Hierarchy](hierarchy.md) | docs/research/hierarchy.md, hierarchy-experiments.md and H brief; private spike paths assigned per phase, production code after HH-09 | Prioritized game-use experiments defined; competing spikes and measured architecture selection pending |

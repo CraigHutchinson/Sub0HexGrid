@@ -8,7 +8,7 @@ option(SUB0HEXGRID_BUILD_EXAMPLES "Build the mapping example" ${PROJECT_IS_TOP_L
 option(SUB0HEXGRID_BUILD_BENCHMARKS "Build nanobench scalar benchmarks" OFF)
 option(SUB0HEXGRID_ENABLE_SANITIZERS "Instrument GCC/Clang with ASan/UBSan" OFF)
 
-add_library(Sub0HexGrid STATIC src/Axial.cpp src/PointyLayout.cpp)
+add_library(Sub0HexGrid STATIC src/axial.cpp src/pointy_layout.cpp)
 add_subdirectory(src/regions)
 add_subdirectory(src/candidates)
 add_library(Sub0HexGrid::Sub0HexGrid ALIAS Sub0HexGrid)

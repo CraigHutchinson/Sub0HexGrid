@@ -21,3 +21,5 @@ stopped at an approval-service usage limit. Access recovered; audit reconciled w
 current Crucible main and standing consumer/foundation methodology. Documentation
 only, no CPU reservation; final PR/CI delivery follows. Crucible now consumes the
 H2 pin aaae5c2; the earlier H3-unstarted status above is historical.
+
+| Codex | Complete local; PR/CI pending | Issue #6 style audit and API/path migration; Debug/Release all 9 CTest pass with unchanged assertion totals | 2026-10-07 / 9791bee / fix/issue-6-sub0-style |

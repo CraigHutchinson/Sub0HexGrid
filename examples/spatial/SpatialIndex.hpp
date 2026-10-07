@@ -10,91 +10,108 @@
 #include <stdexcept>
 #include <vector>
 
-#include <sub0hexgrid/candidates/CandidateCursor.hpp>
+#include "sub0hexgrid/candidates/candidate_cursor.hpp"
 
-namespace sub0hexgrid::example {
+namespace sub0hexgrid::example
+{
 /// Application-owned bins demonstrating resumable builds and snapshot-bound queries.
-class SpatialIndex {
-public:
+class SpatialIndex
+{
+  public:
     /// Build status; failed/cancelled rebuilds preserve the previous committed snapshot.
-    enum class BuildState { idle, working, complete, failed };
+    enum class BuildState
+    {
+        idle,
+        working,
+        complete,
+        failed
+    };
 
     /// A written prefix and bounded work count; invalid means the snapshot was replaced.
-    struct QueryBatch {
-        std::size_t written{};
-        std::size_t work{};
-        bool done{};
-        bool valid{true};
+    struct QueryBatch
+    {
+        std::size_t written_{};
+        std::size_t work_{};
+        bool done_{};
+        bool valid_{true};
     };
 
     /** Resumable query over a committed snapshot; copied queries have independent progress.
      * The index is non-owning and must outlive this cursor. Reads require no concurrent
      * index mutation. Rebuilding publication invalidates outstanding cursors explicitly.
      */
-    class Query {
-    public:
+    class Query
+    {
+      public:
         /** Writes matching snapshot row indices into the output prefix.
          * Each cell visit or entity examination consumes one work unit; zero budget/output
          * yields without progress. Callers check deadlines between calls and retain all
          * prefixes until done; an invalidated query's partial output must be discarded.
          */
-        [[nodiscard]] QueryBatch Read(std::span<std::size_t> output, std::size_t budget) noexcept {
-            if (m_Version != m_Index->m_Version) return {0, 0, false, false};
+        [[nodiscard]] QueryBatch read(std::span<std::size_t> output, std::size_t budget) noexcept
+        {
+            if (version_ != index_->version_)
+                return {0, 0, false, false};
             QueryBatch batch{};
             if (output.empty() || budget == 0) {
-                batch.done = m_Candidates.IsDone() && m_Bin == m_End;
+                batch.done_ = candidates_.isDone() && bin_ == end_;
                 return batch;
             }
-            while (batch.work < budget && batch.written < output.size()) {
-                if (m_Bin < m_End) {
-                    const auto row = m_Index->m_Bins[m_Bin++];
-                    const auto point = m_Index->m_Points[row];
-                    ++batch.work;
-                    if (std::hypot(point.x - m_Center.x, point.y - m_Center.y) <= m_Radius)
-                        output[batch.written++] = row;
+            while (batch.work_ < budget && batch.written_ < output.size()) {
+                if (bin_ < end_) {
+                    const auto row = index_->bins_[bin_++];
+                    const auto point = index_->points_[row];
+                    ++batch.work_;
+                    if (std::hypot(point.x - center_.x, point.y - center_.y) <= radius_)
+                        output[batch.written_++] = row;
                 } else {
                     Axial cell{};
-                    if (m_Candidates.Read(std::span{&cell, 1}) == 0) break;
-                    const auto index = static_cast<std::size_t>(*m_Index->m_Region.TryIndex(cell));
-                    m_Bin = m_Index->m_Offsets[index];
-                    m_End = m_Index->m_Offsets[index + 1];
-                    ++batch.work;
+                    if (candidates_.read(std::span{&cell, 1}) == 0)
+                        break;
+                    const auto index = static_cast<std::size_t>(*index_->region_.tryIndex(cell));
+                    bin_ = index_->offsets_[index];
+                    end_ = index_->offsets_[index + 1];
+                    ++batch.work_;
                 }
             }
-            batch.done = m_Candidates.IsDone() && m_Bin == m_End;
+            batch.done_ = candidates_.isDone() && bin_ == end_;
             return batch;
         }
 
-    private:
+      private:
         friend class SpatialIndex;
         Query(const SpatialIndex& index, CandidateCells cells, Point center, double radius) noexcept
-            : m_Index(&index), m_Version(index.m_Version), m_Candidates(cells),
-              m_Center(center), m_Radius(radius) {}
-        const SpatialIndex* m_Index; // non-owning; snapshot lifetime is checked by version
-        std::uint64_t m_Version;
-        CandidateCursor m_Candidates;
-        Point m_Center;
-        double m_Radius;
-        std::size_t m_Bin{};
-        std::size_t m_End{};
+            : index_(&index), version_(index.version_), candidates_(cells), center_(center),
+              radius_(radius)
+        {
+        }
+        const SpatialIndex* index_; // non-owning; snapshot lifetime is checked by version
+        std::uint64_t version_;
+        CandidateCursor candidates_;
+        Point center_;
+        double radius_;
+        std::size_t bin_{};
+        std::size_t end_{};
     };
 
     /// Validates host capacity and preallocates all current/pending storage; may throw at startup.
     SpatialIndex(PointyLayout layout, AxialRegion region, std::size_t capacity)
-        : m_Layout(layout), m_Region(region) {
-        const auto count = region.GetCellCount();
-        if (count >= m_Offsets.max_size() || capacity > m_Points.max_size() ||
-            capacity > m_Bins.max_size()) throw std::length_error("Spatial index capacity");
+        : layout_(layout), region_(region)
+    {
+        const auto count = region.getCellCount();
+        if (count >= offsets_.max_size() || capacity > points_.max_size() ||
+            capacity > bins_.max_size())
+            throw std::length_error("Spatial index capacity");
         const auto cells = static_cast<std::size_t>(count);
-        m_Points.resize(capacity);
-        m_PendingPoints.resize(capacity);
-        m_SampleCells.resize(capacity);
-        m_Bins.resize(capacity);
-        m_PendingBins.resize(capacity);
-        m_Counts.resize(cells);
-        m_Cursors.resize(cells);
-        m_Offsets.resize(cells + 1);
-        m_PendingOffsets.resize(cells + 1);
+        points_.resize(capacity);
+        pendingPoints_.resize(capacity);
+        sampleCells_.resize(capacity);
+        bins_.resize(capacity);
+        pendingBins_.resize(capacity);
+        counts_.resize(cells);
+        cursors_.resize(cells);
+        offsets_.resize(cells + 1);
+        pendingOffsets_.resize(cells + 1);
     }
 
     SpatialIndex(const SpatialIndex&) = delete;
@@ -102,17 +119,20 @@ public:
     SpatialIndex(SpatialIndex&&) = delete;
     SpatialIndex& operator=(SpatialIndex&&) = delete;
 
-    /** Begins an O(1) rebuild; the input borrow must remain immutable/alive until completion/cancel.
-     * Rejects active builds, excess capacity or exhausted version without changing any state.
-     * Invalid point/region membership is detected by StepRebuild before publication.
+    /** Begins an O(1) rebuild; the input borrow must remain immutable/alive until
+     * completion/cancel. Rejects active builds, excess capacity or exhausted version without
+     * changing any state. Invalid point/region membership is detected by stepRebuild before
+     * publication.
      */
-    [[nodiscard]] bool BeginRebuild(std::span<const Point> input) noexcept {
-        if (m_State == BuildState::working || input.size() > m_Points.size() ||
-            m_Version == std::numeric_limits<std::uint64_t>::max()) return false;
-        m_Input = input;
-        m_Phase = Phase::reset;
-        m_Row = 0;
-        m_State = BuildState::working;
+    [[nodiscard]] bool beginRebuild(std::span<const Point> input) noexcept
+    {
+        if (state_ == BuildState::working || input.size() > points_.size() ||
+            version_ == std::numeric_limits<std::uint64_t>::max())
+            return false;
+        input_ = input;
+        phase_ = Phase::reset;
+        row_ = 0;
+        state_ = BuildState::working;
         return true;
     }
 
@@ -120,92 +140,119 @@ public:
      * Reset, assignment, prefix scan and scatter are all resumable. Publication is one swap
      * after complete validation; all retained queries require an unchanged committed snapshot.
      */
-    [[nodiscard]] BuildState StepRebuild(std::size_t budget) noexcept {
+    [[nodiscard]] BuildState stepRebuild(std::size_t budget) noexcept
+    {
         std::size_t work = 0;
-        while (m_State == BuildState::working && work < budget) {
-            switch (m_Phase) {
+        while (state_ == BuildState::working && work < budget) {
+            switch (phase_) {
             case Phase::reset:
-                if (m_Row == m_Counts.size()) { m_Phase = Phase::assign; m_Row = 0; break; }
-                m_Counts[m_Row++] = 0;
+                if (row_ == counts_.size()) {
+                    phase_ = Phase::assign;
+                    row_ = 0;
+                    break;
+                }
+                counts_[row_++] = 0;
                 ++work;
                 break;
             case Phase::assign:
-                if (m_Row == m_Input.size()) {
-                    m_Phase = Phase::prefix; m_Row = 0; m_PendingOffsets[0] = 0; break;
+                if (row_ == input_.size()) {
+                    phase_ = Phase::prefix;
+                    row_ = 0;
+                    pendingOffsets_[0] = 0;
+                    break;
                 }
-                if (const auto cell = m_Layout.TryCellAt(m_Input[m_Row])) {
-                    if (const auto index = m_Region.TryIndex(*cell)) {
+                if (const auto cell = layout_.tryCellAt(input_[row_])) {
+                    if (const auto index = region_.tryIndex(*cell)) {
                         const auto host = static_cast<std::size_t>(*index);
-                        m_SampleCells[m_Row] = host;
-                        m_PendingPoints[m_Row] = m_Input[m_Row];
-                        ++m_Counts[host];
-                        ++m_Row;
+                        sampleCells_[row_] = host;
+                        pendingPoints_[row_] = input_[row_];
+                        ++counts_[host];
+                        ++row_;
                         ++work;
                         break;
                     }
                 }
-                m_State = BuildState::failed;
-                m_Input = {};
+                state_ = BuildState::failed;
+                input_ = {};
                 break;
             case Phase::prefix:
-                if (m_Row == m_Counts.size()) { m_Phase = Phase::scatter; m_Row = 0; break; }
-                m_PendingOffsets[m_Row + 1] = m_PendingOffsets[m_Row] + m_Counts[m_Row];
-                m_Cursors[m_Row] = m_PendingOffsets[m_Row];
-                ++m_Row;
+                if (row_ == counts_.size()) {
+                    phase_ = Phase::scatter;
+                    row_ = 0;
+                    break;
+                }
+                pendingOffsets_[row_ + 1] = pendingOffsets_[row_] + counts_[row_];
+                cursors_[row_] = pendingOffsets_[row_];
+                ++row_;
                 ++work;
                 break;
             case Phase::scatter:
-                if (m_Row == m_Input.size()) {
-                    m_Points.swap(m_PendingPoints);
-                    m_Bins.swap(m_PendingBins);
-                    m_Offsets.swap(m_PendingOffsets);
-                    m_SampleCount = m_Input.size();
-                    m_Input = {};
-                    ++m_Version;
-                    m_State = BuildState::complete;
+                if (row_ == input_.size()) {
+                    points_.swap(pendingPoints_);
+                    bins_.swap(pendingBins_);
+                    offsets_.swap(pendingOffsets_);
+                    sampleCount_ = input_.size();
+                    input_ = {};
+                    ++version_;
+                    state_ = BuildState::complete;
                     break;
                 }
-                m_PendingBins[m_Cursors[m_SampleCells[m_Row]]++] = m_Row;
-                ++m_Row;
+                pendingBins_[cursors_[sampleCells_[row_]]++] = row_;
+                ++row_;
                 ++work;
                 break;
             }
         }
-        return m_State;
+        return state_;
     }
 
     /// Releases an input borrow and abandons pending work; committed bins remain unchanged.
-    void CancelRebuild() noexcept { m_Input = {}; m_State = BuildState::idle; }
+    void cancelRebuild() noexcept
+    {
+        input_ = {};
+        state_ = BuildState::idle;
+    }
 
     /// Constructs a snapshot-bound query without retaining output storage or allocating.
-    [[nodiscard]] std::optional<Query> TryQuery(Point center, double radius) const noexcept {
-        const auto cells = CandidateCells::TryCreate(m_Layout, m_Region, center, radius);
-        if (!cells) return std::nullopt;
+    [[nodiscard]] std::optional<Query> tryQuery(Point center, double radius) const noexcept
+    {
+        const auto cells = CandidateCells::tryCreate(layout_, region_, center, radius);
+        if (!cells)
+            return std::nullopt;
         return Query{*this, *cells, center, radius};
     }
 
     /// Committed sample count; failed/pending work does not affect this observation.
-    [[nodiscard]] std::size_t GetSampleCount() const noexcept { return m_SampleCount; }
+    [[nodiscard]] std::size_t getSampleCount() const noexcept { return sampleCount_; }
 
     /// Resident vector-capacity payload, excluding vector objects, allocator overhead and input.
-    [[nodiscard]] std::uint64_t GetStorageBytes() const noexcept {
-        return (static_cast<std::uint64_t>(m_Points.capacity()) + m_PendingPoints.capacity()) * sizeof(Point) +
-               (static_cast<std::uint64_t>(m_SampleCells.capacity()) + m_Bins.capacity() +
-                m_PendingBins.capacity() + m_Counts.capacity() + m_Cursors.capacity() +
-                m_Offsets.capacity() + m_PendingOffsets.capacity()) * sizeof(std::size_t);
+    [[nodiscard]] std::uint64_t getStorageBytes() const noexcept
+    {
+        return (static_cast<std::uint64_t>(points_.capacity()) + pendingPoints_.capacity()) *
+                   sizeof(Point) +
+               (static_cast<std::uint64_t>(sampleCells_.capacity()) + bins_.capacity() +
+                pendingBins_.capacity() + counts_.capacity() + cursors_.capacity() +
+                offsets_.capacity() + pendingOffsets_.capacity()) *
+                   sizeof(std::size_t);
     }
 
-private:
-    enum class Phase { reset, assign, prefix, scatter };
-    PointyLayout m_Layout;
-    AxialRegion m_Region;
-    std::vector<Point> m_Points, m_PendingPoints;
-    std::vector<std::size_t> m_SampleCells, m_Bins, m_PendingBins;
-    std::vector<std::size_t> m_Counts, m_Cursors, m_Offsets, m_PendingOffsets;
-    std::span<const Point> m_Input; // non-owning while working; released on cancel/fail/commit
-    std::uint64_t m_Version{};
-    std::size_t m_SampleCount{}, m_Row{};
-    Phase m_Phase{Phase::reset};
-    BuildState m_State{BuildState::idle};
+  private:
+    enum class Phase
+    {
+        reset,
+        assign,
+        prefix,
+        scatter
+    };
+    PointyLayout layout_;
+    AxialRegion region_;
+    std::vector<Point> points_, pendingPoints_;
+    std::vector<std::size_t> sampleCells_, bins_, pendingBins_;
+    std::vector<std::size_t> counts_, cursors_, offsets_, pendingOffsets_;
+    std::span<const Point> input_; // non-owning while working; released on cancel/fail/commit
+    std::uint64_t version_{};
+    std::size_t sampleCount_{}, row_{};
+    Phase phase_{Phase::reset};
+    BuildState state_{BuildState::idle};
 };
-}
+} // namespace sub0hexgrid::example

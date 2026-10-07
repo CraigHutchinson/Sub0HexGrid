@@ -1,6 +1,6 @@
 # T — Integer topology
 
-Own Axial.hpp/Axial.cpp, tests/topology/ and this brief; scalar benchmark registration
+Own axial.hpp/axial.cpp, tests/topology/ and this brief; scalar benchmark registration
 remains I-owned. See the [responsibility map](responsibilities.md).
 Provide checked six-direction steps and exact wide distance over all int32 q/r.
 Inputs/outputs are owned values; no region, geometry, identity or storage knowledge.

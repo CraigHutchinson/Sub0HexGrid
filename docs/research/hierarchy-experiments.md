@@ -54,7 +54,7 @@ separate axes; compare them incrementally rather than a full combinatorial sweep
 | HS-04 | Hex-native hierarchical/path addressing (aperture/central-place candidates) | Prototype sourced parent assignment and coverage separately from display hex shape; quantify rotation/overlap, addressing, locality and conservative excess against axial grouping |
 | HV-01 | Fixed-resolution aggregate raster/pyramid; optional viewer-centred clipmap cache | Can a view-specific cache serve mini-map/zoom better than querying an entity tree? Compare full refresh, dirty tiles and pan/zoom reuse; separate view cache memory from gameplay index |
 | HN-01 | Fine Dijkstra/A* vs region/portal abstraction | Can hierarchical navigation reduce searches without illegal paths or uncontrolled cost inflation? Fine connectivity/clearance remains the oracle; occupancy summaries alone are insufficient |
-| HN-02 | Shared-goal integration/flow fields vs individual routes | How much work is amortized across many units with common goals? Measure field rebuild, dynamic edits and motion consumer cost; do not equate a player-painted vector field with a computed navigation field |
+| HN-02 | Shared-goal integration/flow fields vs individual routes | How much work is amortized across many units with common goals? measure field rebuild, dynamic edits and motion consumer cost; do not equate a player-painted vector field with a computed navigation field |
 
 Round one implements HS-00 and at least three independent options HS-01/02/03.
 HS-04 remains an explicit second-round candidate, not silently excluded by the

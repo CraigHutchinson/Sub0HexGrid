@@ -1,1 +1,1 @@
-sub0hexgrid_add_tests(sub0hexgrid_topology_tests topology kernel.cpp)
+sub0hexgrid_add_tests(sub0hexgrid_topology_tests topology test_topology.cpp)
