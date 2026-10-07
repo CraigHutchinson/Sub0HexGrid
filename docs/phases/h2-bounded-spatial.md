@@ -63,7 +63,7 @@ and records an accepted ADR before R/Q public code:
   inclusive. A center outside the region may still overlap it; a valid disjoint disk
   returns an empty traversal. Unrepresentable arithmetic returns explicit failure.
 - Candidate traversal is conservative: all in-region cells assigned by the existing
-  TryCellAt that can hold a point in the disk are visited. False positives are allowed;
+  tryCellAt that can hold a point in the disk are visited. False positives are allowed;
   false negatives, duplicates and silent clipping of valid in-region candidates are not.
 - Prefer a lazy range of clipped row intervals, ascending r then q, with no heap,
   retained caller buffers or shared scratch. Freeze value/borrow lifetime, partitioning,
@@ -130,7 +130,7 @@ query order/failure/lifetime contract, candidate counts and benchmark limitation
 I adds a standalone application-owned count/offset/bin example that gathers immutable
 point samples, rebuilds pre-sized bins, traverses candidates and performs exact inclusive
 distance filtering. Return/consume snapshot row indices; stable ID policy is optional
-example data, never a library dependency. Query outputs/scratch are caller-owned.
+example data, never a library dependency. query outputs/scratch are caller-owned.
 Compare exact results with brute-force scanning on tiny worlds and adversarial cases.
 The installed-package consumer exercises both new facets without source-tree paths.
 
@@ -138,7 +138,7 @@ Benchmark deterministic uniform, clustered and border-heavy point populations at
 100k/500k/1m entities, recording cell count and occupancy separately. Use 4,096 query
 centers per standard measurement rather than an unbounded all-pairs test; include
 small and larger radius/cell ratios, and a separately bounded coincident stress case.
-Measure mapping, bin rebuild, candidate traversal, exact filtering and combined query
+measure mapping, bin rebuild, candidate traversal, exact filtering and combined query
 time separately; document whether result consumption is included. Fixtures are prepared
 outside timed loops and all measured hot-path buffers are reused. Record resident and
 peak scratch bytes, bytes/cell/entity, candidates/query, true hits and candidate excess;

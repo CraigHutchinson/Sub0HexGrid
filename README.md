@@ -12,7 +12,7 @@ candidate traversal and Crucible migration are subsequent gated increments.
 The [workstream catalog](docs/workstreams/README.md) defines component ownership and
 independent-agent handoffs; [benchmarking](docs/benchmarking.md) defines timing scope.
 
-Read [requirements](docs/requirements.md), [architecture](docs/architecture.md),
+read [requirements](docs/requirements.md), [architecture](docs/architecture.md),
 [numerical decisions](docs/decisions/0001-coordinate-layout.md), and
 [work breakdown](docs/work-breakdown.md). [Validation](docs/validation.md) records
 actual checks and limits. No performance or full-world hex migration claim is made.

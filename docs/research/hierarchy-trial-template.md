@@ -15,7 +15,7 @@ Status starts as planned; never fill timings or correctness from assumptions.
 | Platform / reservation | Hardware, OS/compiler/options, device/backend, uncontended reservation, thermal/frequency/cache conditions |
 | Protocol / repetitions | Rotation, setup exclusion, timed scope, repeated latency samples, noise/uncertainty |
 | Full cycle | Gather + build/update + summaries + queries + order/output + publication; declared workload mix |
-| Query / view / navigation | Per-operation distribution, p95/p99/max where sampled; nodes/leaves/outputs, screen/route quality |
+| query / view / navigation | Per-operation distribution, p95/p99/max where sampled; nodes/leaves/outputs, screen/route quality |
 | Memory / transfers | Resident/pending/frontier payload, total/occupied nodes, emitted/upload/readback bytes; RSS only if measured |
 | Bounded processing | Maximum observed step time/work, zero budget, dense leaf resume, failure/cancel/overflow |
 | Raw evidence / review | Artifact paths, exact commands, code/numeric review, supported and regressing cases |

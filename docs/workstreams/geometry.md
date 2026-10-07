@@ -1,12 +1,12 @@
 # G — World geometry
 
-Own Point/PointyLayout headers, PointyLayout.cpp, tests/geometry/ and this brief.
+Own point/pointy_layout headers, pointy_layout.cpp, tests/geometry/ and this brief.
 Depend on T; retain positive finite radius/origin, checked
 conversion and documented computed-double rounding. Current caller is example/package.
 
 Bulk mapping requires a real caller, caller-owned output, invalid-element semantics,
 overlap/lifetime rules and comparison to scalar behavior. Preserve precision-collapse
-rejection in TryCellCenter. Coordinate scale, ties and changed descriptor semantics
+rejection in tryCellCenter. Coordinate scale, ties and changed descriptor semantics
 require affected Q/H/X agreement through I; no silent precision switch for GPU convenience.
 G owns primitive transforms/numeric assignment; H composes descendant coverage.
 Camera projection, mini-map/zoom thresholds and visual error belong to Presentation.

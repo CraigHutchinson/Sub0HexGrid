@@ -1,1 +1,1 @@
-sub0hexgrid_add_tests(sub0hexgrid_regions_tests regions region.cpp)
+sub0hexgrid_add_tests(sub0hexgrid_regions_tests regions test_regions.cpp)

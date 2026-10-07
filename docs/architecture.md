@@ -44,8 +44,8 @@ reject invalid/unrepresentable arithmetic, including normalized intervals outsid
 the documented binary64 magnitude envelope. False positives remain explicit.
 
 The standalone SpatialIndex example owns preallocated current/pending dense bins.
-Count/scan/scatter rebuild phases and queries resume under explicit work budgets.
-Query work counts both cell visits and entity examinations, including mid-bin yields.
+count/scan/scatter rebuild phases and queries resume under explicit work budgets.
+query work counts both cell visits and entity examinations, including mid-bin yields.
 Applications check deadlines between batches; a batch is a work bound, not a hard
 time guarantee. Input borrows expire on commit/fail/cancel; queries require their
 index to outlive them and are invalidated by publication. No concurrent mutation is
@@ -67,11 +67,11 @@ actual pointy convention and verify against brute-force point membership. Prefer
 clipped row intervals with deterministic order and independent partitioning; no
 allocation, retained inputs, silent truncation or full-region scan for local queries.
 Freeze iteration, clipping, numeric, cancellation/capacity and failure semantics
-before selecting the public range/buffer API. Count arithmetic must also be checked.
+before selecting the public range/buffer API. count arithmetic must also be checked.
 
 Applications own bin construction, entity IDs, exact distance filtering and query
 outputs. Immutable committed bins plus disjoint caller-owned output make independent
-queries possible. Count/scan/scatter and sorted cell-key ranges are candidates for
+queries possible. count/scan/scatter and sorted cell-key ranges are candidates for
 application CPU/GPU builders; neither is mandated by this geometry library. Global
 ID sorting and repeated identity lookup are consumer requirements to justify,
 not compulsory traversal behavior. Complete dense neighborhoods can still require
@@ -117,7 +117,7 @@ promise CPU/GPU identity. Rebased local coordinates may address large-world prec
 but require a consumer decision, not a silent change to Axial. Bulk CPU mapping is
 considered by G with a real caller, reusable output and per-element failure semantics.
 
-Performance gates start during H2 design, before adoption. Measure storage bytes,
+Performance gates start during H2 design, before adoption. measure storage bytes,
 scratch, rebuild/query cost, occupancy and candidate amplification. External compute
 claims include transfers, dispatch, synchronization and rendering contention; scalar
 nanobench results establish only scalar costs. See [benchmarking](benchmarking.md).
@@ -126,10 +126,10 @@ nanobench results establish only scalar costs. See [benchmarking](benchmarking.m
 
 The library has four facets: topology, geometry, finite regions and candidates.
 
-- include/sub0hexgrid/Axial.hpp: Axial, Direction and checked neighbor/distance functions.
-- include/sub0hexgrid/Point.hpp: the two-coordinate world value.
-- include/sub0hexgrid/PointyLayout.hpp: validated radius/origin and conversion methods.
-- include/sub0hexgrid/regions/AxialRegion.hpp: checked compact finite indexing.
+- include/sub0hexgrid/axial.hpp: Axial, Direction and checked neighbor/distance functions.
+- include/sub0hexgrid/point.hpp: the two-coordinate world value.
+- include/sub0hexgrid/pointy_layout.hpp: validated radius/origin and conversion methods.
+- include/sub0hexgrid/regions/axial_region.hpp: checked compact finite indexing.
 - include/sub0hexgrid/candidates/: owned candidate range, slices and resumable cursor.
 - src/: scalar implementations; no mutable/global state or heap-backed storage.
 - examples/: executable consumer mapping cells and checking the topology.

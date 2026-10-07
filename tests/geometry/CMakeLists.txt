@@ -1,1 +1,1 @@
-sub0hexgrid_add_tests(sub0hexgrid_geometry_tests geometry kernel.cpp)
+sub0hexgrid_add_tests(sub0hexgrid_geometry_tests geometry test_geometry.cpp)

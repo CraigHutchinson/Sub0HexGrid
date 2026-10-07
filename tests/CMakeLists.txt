@@ -16,8 +16,9 @@ function(sub0hexgrid_add_tests target label)
     add_test(NAME ${label} COMMAND ${target})
     set_tests_properties(${label} PROPERTIES LABELS ${label})
 endfunction()
-add_library(sub0hexgrid_headers OBJECT headers/axial.cpp headers/point.cpp headers/layout.cpp
-    headers/region.cpp headers/candidates.cpp headers/cursor.cpp)
+add_library(sub0hexgrid_headers OBJECT headers/test_axial_header.cpp headers/test_point_header.cpp headers/test_layout_header.cpp
+    headers/test_region_header.cpp headers/test_candidates_header.cpp headers/test_cursor_header.cpp
+    headers/test_umbrella_header.cpp)
 target_link_libraries(sub0hexgrid_headers PRIVATE Sub0HexGrid::Sub0HexGrid)
 target_compile_options(sub0hexgrid_headers PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4;/WX;/permissive->
@@ -27,7 +28,7 @@ add_subdirectory(geometry)
 add_subdirectory(regions)
 add_subdirectory(candidates)
 add_subdirectory(spatial)
-add_executable(sub0hexgrid_allocation_tests allocation.cpp)
+add_executable(sub0hexgrid_allocation_tests test_allocation.cpp)
 target_link_libraries(sub0hexgrid_allocation_tests PRIVATE Sub0HexGrid::Sub0HexGrid)
 sub0hexgrid_instrument(sub0hexgrid_allocation_tests)
 add_test(NAME allocation COMMAND sub0hexgrid_allocation_tests)

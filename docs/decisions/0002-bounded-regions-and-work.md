@@ -8,7 +8,7 @@ count. Row-major indexing uses r outer/q inner. Reversed bounds and overflowing
 products fail; index/cell operations return optional on out-of-domain inputs.
 It owns metadata only. Accessors expose bounds/count for algorithms and adapters.
 
-CandidateCells::TryCreate(layout, region, center, radius) constructs conservative
+CandidateCells::tryCreate(layout, region, center, radius) constructs conservative
 clipped axial rectangle candidates, not exact disk/cell intersection. Bounding-box
 false positives are accepted for the first implementation; no valid mapped point
 inside the inclusive disk may be omitted. Invalid/nonfinite/unsupported arithmetic
@@ -18,8 +18,8 @@ Const ranges can be used independently; modifying one cursor needs exclusive acc
 
 CandidateCells is a forward range and supports checked index/count slicing, including
 empty end slices. CandidateCursor owns a range and fills caller-owned span<Axial>
-via Read, reporting the written prefix; empty buffers make no progress. Remaining
-and IsDone distinguish completion from yielding. Copying a cursor snapshots progress.
+via read, reporting the written prefix; empty buffers make no progress. remaining
+and isDone distinguish completion from yielding. Copying a cursor snapshots progress.
 No clocks, callbacks, workers or heap allocation enter this facet. Each cell read
 is constant work; output buffer size bounds work. Application time budgeting checks
 a deadline between batches, and exact filtering must separately budget dense-bin
@@ -50,7 +50,7 @@ epsilon. IEEE binary64 round-to-nearest without fast-math is required for this
 completeness contract; independent tests cover finite boundaries and tiny/huge scales.
 
 The first candidate rectangle may include more cells than a row-tight disk envelope.
-Measure amplification before refinement. It remains local O(candidates) with constant
+measure amplification before refinement. It remains local O(candidates) with constant
 metadata and O(1) slicing/creation, and large regions can be streamed without allocation.
 G exposes immutable radius/origin observations solely for this real Q consumer.
 
@@ -59,6 +59,6 @@ G exposes immutable radius/origin observations solely for this real Q consumer.
 R/Q each have named executable/package consumers. T -> R; T/G/R -> Q is acyclic.
 Region/range/cursor own only scalar metadata; caller buffers belong to the application.
 No speculative backend, cell storage or clock surface. Forward range composition and
-explicit resumable Read are both consumed. Bounds fail up front; no hidden partial
+explicit resumable read are both consumed. Bounds fail up front; no hidden partial
 failure during iteration. Integrator plan self-review found no blocking L0/L1/L2 issue;
 code review and independent numerical/allocation evidence remain separate gates.

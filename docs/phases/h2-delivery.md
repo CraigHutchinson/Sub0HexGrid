@@ -68,7 +68,7 @@ Three nanobench epochs, minimum one iteration; all instability warnings are reta
 in [raw output](../benchmarks/h2-msvc.txt). This is a baseline, not a comparison or
 promotion decision; unstable rows are provisional. Setup and allocations are outside
 timed loops. 4,096 deterministic centers per standard case; separate stress/empty/
-large cases use 64 centers. Query results are consumed as reusable row prefixes.
+large cases use 64 centers. query results are consumed as reusable row prefixes.
 
 Each query's chrono duration is sampled once after rebuilding resident bins, before
 nanobench repetitions, then sorted for nearest-rank p95/p99. Timer overhead is

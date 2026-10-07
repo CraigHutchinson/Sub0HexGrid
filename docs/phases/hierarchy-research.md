@@ -26,7 +26,7 @@ This supplements the programme under the 2026-10-05 standing methodology.
 | Package / owner | Exclusive work and handoff | Gate |
 |---|---|---|
 | HH-01 / H geometry researcher | Source/algorithm comparison in docs/research/hierarchy.md and H brief; exact logical vs geometric nesting, negative addressing, bounds, index widths | Primary sources and explicit remapping to planar q/r; initial pass complete |
-| HH-02 / Crucible spatial reviewer | Read-only workload/snapshot/LOD requirements; proposed application tree/summary layout and update policy | Real receiving scenarios, fixed ECS pin, deterministic IDs/replay and memory/time limits |
+| HH-02 / Crucible spatial reviewer | read-only workload/snapshot/LOD requirements; proposed application tree/summary layout and update policy | Real receiving scenarios, fixed ECS pin, deterministic IDs/replay and memory/time limits |
 | HH-03 / ECS reviewer | Audit bounded gathering, stable IDs, structural invalidation and executor barriers against Crucible's actual dependency | Narrow upstream gap report; no speculative hierarchy ownership in ECS |
 | HH-04 / integrator + H | Freeze experimental protocol, fine-reference invariants and temporary adapter/snapshot contracts | Plan/numeric review; permits private spikes, does not select production architecture |
 | HH-05 / spike owners + integrator | Round one: flat reference plus dense pyramid, sparse linear tree and chunk BVH | Shared W0-W3 fixtures, doctest correctness, CPM nanobench full-cycle/byte evidence; independent paths and serial measurements |
@@ -37,7 +37,7 @@ This supplements the programme under the 2026-10-05 standing methodology.
 
 HH-01 and HH-02/03 can research independently. HH-04 waits for both geometry and
 receiving contracts; implementation workers do not guess parent or snapshot APIs.
-Integrator owns central docs/catalog and cross-repo proposals. Read-only sibling
+Integrator owns central docs/catalog and cross-repo proposals. read-only sibling
 research is complete; changes to Crucible/ECS require their own active claims,
 instructions and reviewed work packages. Record exact bases and fresh host resources
 before prototypes. Native compute remains an external adapter activity.
@@ -91,7 +91,7 @@ processing can lag and how conservative bounds stay valid during motion. Preserv
 ID-sorted reduction/replay unless a separately approved deterministic policy replaces it.
 
 For accelerators, propose flat node/key/child-range/summary arrays, fixed-width
-index limits and conservative geometry precision. Rebuild/refit, CPU transfers,
+index limits and conservative geometry precision. rebuild/refit, CPU transfers,
 dispatch and completion barriers must be measured end-to-end by a named adapter.
 Do not encode C++ object bytes, size_t, virtual interfaces or device handles into
 Sub0HexGrid. Compare level-order processing, compact traversal and bounded frontier
@@ -108,7 +108,7 @@ substituting one radius-query benchmark for every game operation.
 
 Reuse H2 exact brute-force fixtures and 100k/500k/1m sizes, adding sparse worlds,
 moving fractions, mixed query radii and coarse zoom/aggregate outputs. Include uniform,
-clustered, border, empty, coincident and world-wide queries. Measure construction,
+clustered, border, empty, coincident and world-wide queries. measure construction,
 incremental update, publication, node/leaf visits, exact predicates, output ordering,
 peak pending/scratch payload and consumer p95/p99 separately. Exact K-output work
 is unavoidable; wide aggregate queries and empty-region pruning are different wins.
