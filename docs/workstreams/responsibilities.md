@@ -69,6 +69,15 @@ remain possible, joined by explicit snapshot identity and fine coordinates.
 
 ## Interface handoff checklist
 
+Every owner records its top-down receiving behavior and bottom-up capability/limit,
+then hands off one reconciled contract. Presentation supplies visible mini-map/zoom/
+picking and interaction requirements; Spatial/H supply exact coverage and cost limits.
+Runtime/Contracts reconcile feedback, latency and snapshot lifetime. Applicable audio
+or background-fidelity research receives a W0-assigned application owner; it does not
+move into geometry or silently become implemented. A phase closes with the next
+balanced consumer slice, not only completion of independent foundations. Concept,
+synthetic, native graphics/input/audio and participant evidence remain separate.
+
 Sub0HexGrid I owns its standalone spike protocol/harness; Crucible Validation owns
 consumer extensions, replay/render/navigation evidence and artifacts in Crucible.
 They agree shared inputs/counters through the integrators, not joint edit ownership

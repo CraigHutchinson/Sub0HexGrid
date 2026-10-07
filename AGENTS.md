@@ -1,5 +1,18 @@
 # Sub0HexGrid repository guidance
 
+## Standing design methodology: top-down and bottom-up
+
+Iterate the end-consumer experience and technical foundations together. Start from
+named game uses such as mini-map/zoom, motion, navigation and interaction feedback;
+use bounded conceptual/playable spikes to expose concrete requirements. Work upward
+from verified geometry, capacity/lifetime/failure limits and controlled measurements.
+Reconcile both through the smallest useful received vertical slice and explicit
+contracts; revise either side from evidence. Every phase plan/review records both
+directions, trade-offs and the next balanced slice. Keep game/graphics/audio policy
+local and distinguish concepts, synthetic checks, native execution and participant
+evidence. Feed only demonstrated product-neutral needs and minimal reproductions
+upstream; standalone foundations alone do not establish game value.
+
 Build product-neutral C++23 value/geometry APIs with concrete consumers. Read
 docs/requirements.md, docs/architecture.md and the numerical decision before code.
 Coordinate operations must check overflow; geometry rejects nonfinite/unrepresentable

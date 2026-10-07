@@ -15,6 +15,14 @@ complementary refinement, not a substitute for this hierarchy investigation.
 
 ## Division and sequence
 
+Each phase records both directions: top-down motion/mini-map/zoom/navigation and
+interaction experience; bottom-up fine assignment, complete coverage, bounded work,
+memory and measured costs. Reconcile them in one named vertical receiving slice,
+with trade-offs and a next balanced slice in the close record. Use conceptual or
+playable consumer spikes alongside private structure comparisons; distinguish
+synthetic/headless exports from native rendering/input/audio and participant evidence.
+This supplements the programme under the 2026-10-05 standing methodology.
+
 | Package / owner | Exclusive work and handoff | Gate |
 |---|---|---|
 | HH-01 / H geometry researcher | Source/algorithm comparison in docs/research/hierarchy.md and H brief; exact logical vs geometric nesting, negative addressing, bounds, index widths | Primary sources and explicit remapping to planar q/r; initial pass complete |

@@ -15,3 +15,9 @@
 Local Debug/Release and ASan/UBSan gates passed; see validation.md and review.md.
 Exact-head CI and merge are recorded in the PR. H2 is implemented; H3 adoption and
 hierarchy implementation are unstarted. Hierarchy research/architecture phase is defined.
+
+Resumed 2026-10-07: original responsibility commits were pushed but PR creation
+stopped at an approval-service usage limit. Access recovered; audit reconciled with
+current Crucible main and standing consumer/foundation methodology. Documentation
+only, no CPU reservation; final PR/CI delivery follows. Crucible now consumes the
+H2 pin aaae5c2; the earlier H3-unstarted status above is historical.
