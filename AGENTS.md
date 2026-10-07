@@ -1,5 +1,18 @@
 # Sub0HexGrid repository guidance
 
+## Standing design methodology: top-down and bottom-up
+
+Iterate the end-consumer experience and technical foundations together. Start from
+named game uses such as mini-map/zoom, motion, navigation and interaction feedback;
+use bounded conceptual/playable spikes to expose concrete requirements. Work upward
+from verified geometry, capacity/lifetime/failure limits and controlled measurements.
+Reconcile both through the smallest useful received vertical slice and explicit
+contracts; revise either side from evidence. Every phase plan/review records both
+directions, trade-offs and the next balanced slice. Keep game/graphics/audio policy
+local and distinguish concepts, synthetic checks, native execution and participant
+evidence. Feed only demonstrated product-neutral needs and minimal reproductions
+upstream; standalone foundations alone do not establish game value.
+
 Build product-neutral C++23 value/geometry APIs with concrete consumers. Read
 docs/requirements.md, docs/architecture.md and the numerical decision before code.
 Coordinate operations must check overflow; geometry rejects nonfinite/unrepresentable
@@ -17,6 +30,14 @@ skills/parallel-workstreams/SKILL.md. Follow docs/workstreams/README.md and the
 component brief. Architecture defines dependencies; the phase plan defines current
 assignments. Planning does not dispatch agents or implement H2/H3 automatically.
 Reassess retain/consolidate/split/defer at phase start and record reasons.
+Read docs/workstreams/responsibilities.md before hierarchy/acceleration work.
+Each artifact/contract has one defining owner; affected consumers review changes
+through I. H owns grouping/coverage, Q fine candidates, application Spatial occupied
+indexes, Presentation view policy, and external adapters device execution. Private
+spike ownership is phase-specific and never changes production ownership implicitly.
+When adding a cross-cutting axis, audit every stream brief and the dependency/map
+handoffs, not only the new stream. Resolve overlaps/unassigned artifacts before
+dispatch and carry defining owners into the phase protocol and close record.
 
 The integrator owns shared contracts, root CMake/exports, cmake/dependency pins,
 presets, CI, central docs and current shared fixtures. Independent workers edit

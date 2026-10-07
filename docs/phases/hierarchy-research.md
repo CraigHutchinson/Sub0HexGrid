@@ -7,10 +7,21 @@ whether and how they integrate across Sub0HexGrid, Crucible and Sub0ECS. Initial
 [research](../research/hierarchy.md) and cross-repository read-only review are complete.
 The [use-case/experiment programme](../research/hierarchy-experiments.md) specifies
 priorities, spike options, workload packs and evidence rules. No tree API is selected.
+Use the [responsibility map](../workstreams/responsibilities.md) before assigning
+each spike or consumer: defining semantics and production paths stay with their
+stream, even when a private experiment implements several layers for measurement.
 H2 remains the fine-grid reference. HX-05 tighter local candidates is a separate
 complementary refinement, not a substitute for this hierarchy investigation.
 
 ## Division and sequence
+
+Each phase records both directions: top-down motion/mini-map/zoom/navigation and
+interaction experience; bottom-up fine assignment, complete coverage, bounded work,
+memory and measured costs. Reconcile them in one named vertical receiving slice,
+with trade-offs and a next balanced slice in the close record. Use conceptual or
+playable consumer spikes alongside private structure comparisons; distinguish
+synthetic/headless exports from native rendering/input/audio and participant evidence.
+This supplements the programme under the 2026-10-05 standing methodology.
 
 | Package / owner | Exclusive work and handoff | Gate |
 |---|---|---|

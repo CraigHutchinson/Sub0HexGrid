@@ -14,7 +14,7 @@ it does not authorize implementation or create public APIs/targets.
 | Regions R | Finite membership and compact coordinate/index mapping | AxialRegion inclusive rectangle + Axial/uint64 index -> checked membership/index/coordinate | T; implemented H2 |
 | Candidates Q | Complete conservative world-radius candidate traversal | G layout + R region + query disk -> clipped conservative rectangle, slices and cursor batches | G + R; implemented H2 |
 | Hierarchy H | Multilevel addressing, logical grouping and conservative descendant coverage | Frozen fine cells and level/group rules -> proposed parent/bounds contracts | T/G/R conventions; compatible with Q reference, research phase, no API |
-| Interoperability X | External-kernel descriptor, buffer layout and parity specification | Frozen G/R/Q conventions -> explicitly laid-out descriptor and fixtures | G + R + Q; proposed, consumer-gated |
+| Interoperability X | External-kernel descriptor, buffer layout and parity specification | Selected frozen G/R/Q, plus H for hierarchy interchange -> descriptor and fixtures | Selected scalar contracts; proposed, consumer-gated |
 | Integration I | Contracts, package/build inventory, dependencies, CI, cross-component evidence | Stream handoffs -> reviewed combined package and consumer evidence | Owns shared wiring; current |
 
 The workstream catalog is [workstreams/README.md](workstreams/README.md). It defines
@@ -23,7 +23,10 @@ boundaries are durable; phase assignments may retain, consolidate, split or defe
 them. H2 implementation and evidence are recorded in [its close record](phases/h2-delivery.md). Existing flat public include paths remain
 stable; new component folders are introduced only alongside consumed implementation.
 
-Dependency direction is T -> G, T -> R, G/R -> Q, G/R/Q -> X; I composes and validates.
+Dependency direction is T -> G/R, G/R -> Q, T/G/R -> proposed H, and selected
+G/R/Q/H contracts -> X. H/Q remain independent; X is never a scalar dependency.
+I composes and validates. The [responsibility map](workstreams/responsibilities.md)
+defines one owner for each artifact and its application/infrastructure handoff.
 T never calls G; R never calls world geometry; Q neither stores entities nor performs
 gameplay filtering. X does not introduce CUDA/Vulkan dependencies into the kernel.
 Changes to shared conventions need the integrator and affected stream owners before
@@ -135,7 +138,7 @@ The library has four facets: topology, geometry, finite regions and candidates.
 - cmake/: package configuration and consumer validation script.
 - docs/: requirements, numerical decisions, work breakdown and evidence.
 
-Dependencies are acyclic: Axial/Point values -> PointyLayout; consumers -> library.
+Implemented dependencies are acyclic: T -> G/R, G/R -> Q; consumers -> library.
 There is one concrete layout; its factory encodes positive finite geometry. Optional
 results express invalid direction/overflow/conversion failure without exceptions.
 No lifetime-bearing borrow leaves the kernel. Immutable layout/value operations can
